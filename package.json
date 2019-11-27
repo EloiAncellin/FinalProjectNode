@@ -19,11 +19,13 @@
         "socket.io": "^2.3.0"
     },
     "scripts": {
-        "test": "./node_modules/mocha/bin/mocha"
+        "test": "./node_modules/mocha/bin/mocha",
+        "test:coveralls" : "jest --coverage  --coverageReporters=text-lcov | coveralls"
     },
     "devDependencies": {
         "coveralls": "^3.0.9",
         "har-validator": "^5.1.3",
+        "jest": "^24.9.0",
         "mocha-lcov-reporter": "^1.3.0",
         "tap": "^14.10.2"
     }

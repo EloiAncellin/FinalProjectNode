@@ -11,3 +11,9 @@ deploy:
 
 install:
   - npm install
+
+script:
+  - npm run test:coveralls
+
+notifications:
+  - email:false
