@@ -1,6 +1,13 @@
 language: node_js
 node_js:
   - 12.13.0
+deploy:
+  provider: pages
+  skip_cleanup: true
+  keep_history: true
+  github_token: ${{secrets. githubToken}}
+  on:
+    branch: master
 
 install:
   - npm install
