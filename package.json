@@ -23,5 +23,8 @@
     },
     "scripts": {
         "test": "test/test.js"
+    },
+    "devDependencies": {
+        "har-validator": "^5.1.3"
     }
 }
