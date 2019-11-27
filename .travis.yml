@@ -6,7 +6,7 @@ deploy:
   provider: pages
   skip_cleanup: true
   keep_history: true
-  github_token: gitHubAuth
+  github_token: $gitHubAuth
   on:
 branch: master
 
