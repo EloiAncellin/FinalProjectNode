@@ -1,6 +1,10 @@
 var session = require('cookie-session'); // Charge le middleware de sessions
 var bodyParser = require('body-parser'); // Charge le middleware de gestion des paramètres
 var dateFormat = require('dateformat');
+var mysql = require('mysql');
+var dbCon = require('./dbConnection.js');
+var functions = require('./functions.js');
+
 dateFormat.i18n = {
     dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
     monthNames: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Jui', 'Jul', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec', 'Janvier', 'Février', 'Mars', 'Avirl', 'Mai', 'Juin', 'Julliet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
@@ -15,8 +19,8 @@ var io = require('socket.io')(server);
 var chatIO = io.of('/my-chat');
 var todoListIO = io.of('/my-todoList');
 
-/*Le port est 8090*/
-server.listen(8081);
+/*Le port est 8080*/
+server.listen(8080);
 
 //Déclaration des variables
 var id = 0;
@@ -24,6 +28,25 @@ var todoList = [];
 var user = [];
 user[0] = [];
 user[1] = [];
+
+var dbConfig = {
+    user: 'root',
+    password: 'root',
+    host: '127.0.0.1',
+    database: 'td_list_test',
+    port: 8889
+}
+
+
+const connection = mysql.createConnection(dbConfig);
+
+connection.connect((err) => {
+  if (err) throw err;
+  console.log('Connected!');
+});
+
+
+dbCon.getTodoList(connection, todoList);
 
 
 /* On utilise les sessions */
@@ -57,10 +80,14 @@ todoListIO.on('connection', function (socket) {
         todoListIO.emit('update todolist', todoList);
     });
     socket.on('add task', function (task) {
+
         task = ent.encode(task);
         var now = new Date();
         todoList.push([id, task, socket.pseudo, dateFormat(now, "d mmm à H:MM:ss")]);
         id++;
+        console.log(todoList);
+        // sauvegarder la td ici.
+        dbCon.saveTodoList(connection, todoList);
         todoListIO.emit('update todolist', todoList);
     });
     socket.on('remove task', function (task_id) {
@@ -71,6 +98,7 @@ todoListIO.on('connection', function (socket) {
                 break;
             }
         }
+        dbCon.saveTodoList(connection, todoList);
         todoListIO.emit('update todolist', todoList);
     });
     socket.on('manage task', function (task) {
@@ -85,41 +113,26 @@ todoListIO.on('connection', function (socket) {
             }
 
         }
+        dbCon.saveTodoList(connection, todoList);
         todoListIO.emit('update todolist', todoList);
     });
+
+    //bouton aller vers le haut.
     socket.on('go up', function (id) {
-        for (var i=todoList.length-1; i>=0; i--) {
-
-            if ((todoList[i][0] === id) && (i>0)) {
-                var swap = todoList[i];
-                todoList[i] = todoList[i - 1];
-                todoList[i - 1] = swap;
-                break;
-            }
-
-        }
+        functions.goUp(todoList, id);
         todoListIO.emit('update todolist', todoList);
-
     });
+
+    // boutton aller vers le bas.
     socket.on('go down', function (id) {
-        for (var i=todoList.length-2; i>=0; i--) {
-
-            if ((todoList[i][0] === id)) {
-                var swap = todoList[i];
-                todoList[i] = todoList[i + 1];
-                todoList[i + 1] = swap;
-                break;
-            }
-
-        }
+        functions.goDown(todoList, id);
         todoListIO.emit('update todolist', todoList);
-
     });
 });
 
 
+// partie utilsateurs
 chatIO.on('connection', function (socket) {
-
     socket.on('add user', function (pseudo) {
         pseudo = ent.encode(pseudo);
         var now = new Date();
@@ -128,6 +141,7 @@ chatIO.on('connection', function (socket) {
         user[1].push([pseudo, dateFormat(now, "d mmm à H:MM:ss")]);
         chatIO.emit('user joined', user);
     });
+
 
     socket.on('disconnect', function () {
         var now = new Date();
