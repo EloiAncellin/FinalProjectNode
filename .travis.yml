@@ -1,12 +1,5 @@
 language: node_js
 node_js:
   - 12.13.0
-deploy:
-  provider: pages
-  skip_cleanup: true
-  keep_history: true
-  github_token: dfbb05e3de33ee7002917671c7a401b24a0169c8
-  on:
-    branch: master
 install:
   - npm install
