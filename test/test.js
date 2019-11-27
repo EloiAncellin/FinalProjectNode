@@ -11,7 +11,7 @@ testTodoList = [
 	[ 243, 'ffd', 'pierre', ' 15 Nov à 19:43:45' ],
 	[ 244, 'efz', 'Jean', ' 15 Nov à 19:48:45' ]
 ]
-
+/*
 
 var dbConfig = {
 		    user: 'root',
@@ -113,7 +113,12 @@ describe('Go down 2', function(){
 	});
 })
 
-
+*/
+describe('Some simple test', () => {
+  it('should return true', () => {
+    assert.strictEqual(true, true);
+  });
+});
 
 
 
