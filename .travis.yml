@@ -19,4 +19,4 @@ after_success:
     - npm run coveralls
 
 notifications:
-  - email:false
+  - email: false
