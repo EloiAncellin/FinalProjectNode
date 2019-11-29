@@ -25,4 +25,4 @@ jest
 
 
 
-# [Contributors](https://github.com/EloiAncellin/FinalProjectNode/CONTRIBUTORS.md)
+## [Contributors](https://github.com/EloiAncellin/FinalProjectNode/blob/master/CONTRIBUTORS.md)
