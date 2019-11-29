@@ -20,6 +20,7 @@
     },
     "scripts": {
         "test": "./node_modules/mocha/bin/mocha",
+        "start": "npm ./app/app.js",
         "test:coveralls" : "jest --coverage  --coverageReporters=text-lcov | coveralls"
     },
     "devDependencies": {
