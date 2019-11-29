@@ -22,3 +22,7 @@ npm test
 ```console
 jest
 ```
+
+
+
+# [Contributors](https://github.com/EloiAncellin/FinalProjectNode/CONTRIBUTORS.md)
