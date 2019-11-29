@@ -10,10 +10,13 @@ deploy:
     branch: master
 
 install:
-  - npm ci
+    - npm ci
 
 script:
-  - npm run test:coveralls
+    - npm run test-travis
+
+after_success:
+    - npm run coveralls
 
 notifications:
   - email:false

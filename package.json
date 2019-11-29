@@ -19,10 +19,10 @@
         "socket.io": "^2.3.0"
     },
     "scripts": {
-        "test": "./node_modules/mocha/bin/mocha",
-        "start": "npm ./app/app.js",
-        "cover": "nyc npm run test",
-        "test:coveralls": "jest --coverage  --coverageReporters=text-lcov | coveralls"
+        "start": "node ./app/app.js",
+        "test": "mocha",
+        "test-travis": "nyc --reporter=lcov npm run test",
+        "coveralls": "cat ./coverage/lcov.info | coveralls"
     },
     "devDependencies": {
         "coveralls": "^3.0.9",
