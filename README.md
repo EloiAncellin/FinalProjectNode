@@ -1,4 +1,5 @@
-# FinalProjectNode [![Build Status](https://travis-ci.com/EloiAncellin/FinalProjectNode.svg?branch=master)](https://travis-ci.com/EloiAncellin/FinalProjectNode) [![Coverage Status](https://coveralls.io/repos/github/EloiAncellin/FinalProjectNode/badge.svg?branch=master)](https://coveralls.io/github/EloiAncellin/FinalProjectNode?branch=master)
+# FinalProjectNode <a href="https://travis-ci.com/EloiAncellin/FinalProjectNode"><img src="https://travis-ci.com/EloiAncellin/FinalProjectNode.svg?branch=master&kill_cache=1" /></a> <a href="https://coveralls.io/github/EloiAncellin/FinalProjectNode?branch=master"><img src="https://coveralls.io/repos/github/EloiAncellin/FinalProjectNode/badge.svg?branch=master&kill_cache=1" /></a>
+
 
 Todo List app, using NodeJS.
 
