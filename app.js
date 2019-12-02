@@ -4,21 +4,24 @@ const app = express();
 
 const MongoClient = require('mongodb').MongoClient;
 const Server = require('mongodb').Server;
-var dbo;
+const host = process.env.DB_HOST;
+const port = process.env.DB_PORT;
+const name = process.env.DB_NAME;
 
-app.get('/', (req, res) => {
-    dbo.collection('users').insertOne({ 'name': 'omar aflak' }, function(err, result){
-        if (err) res.send('oups...')
-        dbo.collection('users').findOne({}, function(err, result){
-            if (err) res.send('oups...')
-            res.send(JSON.stringify(result))
-        });
-    });
-})
-
-MongoClient.connect(new Server(process.env.DB_HOST, process.env.DB_PORT), function(err, db) {
+MongoClient.connect(new Server(host, port), function(err, client) {
     if (err) throw err;
-    dbo = db.db(process.env.DB_NAME);
-    var port = process.env.WEB_PORT;
-    app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+    var db = client.db(name);
+
+    app.get('/', (req, res) => {
+        db.collection('users').insertOne({ 'name': 'omar aflak' }, function(err, result){
+            if (err) res.send('oups...')
+            db.collection('users').findOne({}, function(err, result){
+                if (err) res.send('oups...')
+                res.send(JSON.stringify(result))
+            });
+        });
+    })
+
+    const web_port = process.env.WEB_PORT
+    app.listen(web_port, () => console.log(`Example app listening on port ${web_port}!`))
 });
