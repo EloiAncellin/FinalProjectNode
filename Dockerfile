@@ -5,5 +5,4 @@ COPY ./package-lock.json .
 RUN npm ci
 COPY ./app.js .
 COPY ./views .
-COPY ./test .
-CMD node start
+CMD npm start
