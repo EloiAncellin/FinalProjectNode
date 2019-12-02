@@ -1,4 +1,4 @@
-require('dotenv').configure();
+require('dotenv').config();
 const expect = require('chai').expect;
 const sum = require('../utils/sum.js');
 const MongoClient = require('mongodb').MongoClient;
