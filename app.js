@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 MongoClient.connect(new Server(process.env.DB_HOST, process.env.DB_PORT), function(err, db) {
     if (err) throw err;
-    dbo = db.db("mydb");
+    dbo = db.db(process.env.DB_NAME);
     var port = process.env.WEB_PORT;
     app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 });
