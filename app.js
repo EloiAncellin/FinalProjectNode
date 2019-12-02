@@ -1,8 +1,9 @@
+require('dotenv').config()
 const express = require('express');
 const app = express();
-const port = 8080;
 
 const MongoClient = require('mongodb').MongoClient;
+const Server = require('mongodb').Server;
 var dbo;
 
 app.get('/', (req, res) => {
@@ -15,8 +16,9 @@ app.get('/', (req, res) => {
     });
 })
 
-MongoClient.connect('mongodb://mongodb:27017/', function(err, db) {
+MongoClient.connect(new Server(process.env.DB_HOST, process.env.DB_PORT), function(err, db) {
     if (err) throw err;
     dbo = db.db("mydb");
+    var port = process.env.WEB_PORT;
     app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 });
