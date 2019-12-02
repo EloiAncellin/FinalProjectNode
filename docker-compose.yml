@@ -4,6 +4,8 @@ services:
     web:
         build: ./
         ports:
-            - "8080:8080"
+            - "${DB_PORT}:${DB_PORT}"
+        links:
+            - "mongodb:${DB_HOST}"
     mongodb:
-        image: mongo
+        image: "mongo:${DB_TAG}"
