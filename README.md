@@ -5,7 +5,7 @@ Todo List app, using NodeJS.
 
 # Get Started
 
-``` console
+```
 npm install
 npm test
 npm start
