@@ -1,9 +1,12 @@
 language: node_js
 node_js:
-  - 12.13.0
+    - 12.13.0
 
 services:
     - mongodb
+
+env:
+    - APP_ENV=travis
 
 install:
     - npm ci
@@ -15,4 +18,4 @@ after_success:
     - npm run coveralls
 
 notifications:
-  - email: false
+    - email: false
