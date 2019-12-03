@@ -9,8 +9,10 @@ services:
             - "mongodb:${DB_HOST}"
         volumes:
             - "./src:/code/src"
+        container_name: web
 
     mongodb:
         image: "mongo:${DB_TAG}"
         ports:
             - "${DB_PORT}:${DB_PORT}"
+        container_name: mongodb
