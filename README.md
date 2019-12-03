@@ -6,9 +6,13 @@ Todo List app, using NodeJS.
 # Get Started
 
 ```
-npm install
-npm test
-npm start
+docker-compose up
+```
+
+# Tests
+
+```
+docker exec -it web npm test
 ```
 
 # [Contributors](https://github.com/EloiAncellin/FinalProjectNode/blob/master/CONTRIBUTORS.md)
