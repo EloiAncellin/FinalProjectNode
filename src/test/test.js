@@ -1,5 +1,6 @@
 require('custom-env').env(process.env.APP_ENV);
-const mongoose = require('mongoose');
+const MongoClient = require('mongodb').MongoClient;
+const Server = require('mongodb').Server;
 const expect = require('chai').expect;
 const sum = require('../utils/sum.js');
 const host = process.env.DB_HOST;
@@ -7,8 +8,8 @@ const port = process.env.DB_PORT;
 const name = process.env.DB_NAME;
 const url = `mongodb://${host}:${port}`;
 
-// mock models
-// const User = mongoose.model('User', { name: String });
+var client;
+var db;
 
 describe('Some simple test', () => {
     it('should return sum', () => {
@@ -16,21 +17,32 @@ describe('Some simple test', () => {
     });
 });
 
-describe('Database testing', () => {
-    before(() => {
-        return mongoose.createConnection(url, {useNewUrlParser: true});
+/*describe('Database testing', () => {
+    it('connect to db', (done) => {
+        MongoClient.connect(new Server(host, port), function(err, cl){
+            expect(err).to.not.exist;
+            client = cl;
+            db = client.db(name);
+            done();
+        });
     });
 
-    /*describe('Test Write / Read', () => {
-        it('write user to database', () => {
-            return new User({ name: 'Omar Aflak' }).save();
+    it('write user to database', (done) => {
+        db.collection('users').insertOne({ 'name': 'omar aflak' }, function(err, result){
+            expect(err).to.not.exist;
+            done();
         });
-
-        it('read user from database', () => {
-           User.find({name: 'Omar Aflak'}, (err, result) => {
-               expect(err).to.not.exist();
-               expect(result.name).to.equal('Omar Aflak');
-           }); 
+    });
+    
+    it('read user from database', (done) => {
+        db.collection('users').findOne({}, function(err, result){
+            expect(err).to.not.exist;
+            expect(result.name).to.equal('omar aflak');
+            done();
         });
-    });*/
-});
+    });
+    
+    it('close db', () => {
+        client.close();
+    });
+});*/
