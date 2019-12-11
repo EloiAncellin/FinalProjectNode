@@ -2,7 +2,7 @@ const expect = require('chai').expect;
 const utils = require('../utils/mongoUtils');
 const sum = require('../utils/sum.js');
 
-var _db;
+let _db;
 
 describe('Some simple test', () => {
     it('should return sum', () => {

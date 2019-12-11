@@ -5,8 +5,8 @@ const host = process.env.DB_HOST;
 const port = process.env.DB_PORT;
 const name = process.env.DB_NAME;
 
-var _client;
-var _db;
+let _client;
+let _db;
 
 module.exports = {
     connectToDatabase: function(callback) {
