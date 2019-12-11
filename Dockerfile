@@ -3,7 +3,9 @@ WORKDIR /code
 COPY package.json .
 COPY package-lock.json .
 RUN npm ci
-COPY .env .
 COPY src src
+COPY run.sh .
+COPY .env .
+COPY tsconfig.json .
 VOLUME ["/code/src"]
-CMD npm start
+CMD sh run.sh
