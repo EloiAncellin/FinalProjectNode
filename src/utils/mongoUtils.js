@@ -1,28 +1,27 @@
-const MongoClient = require('mongodb').MongoClient;
-const Server = require('mongodb').Server;
-const host = process.env.DB_HOST;
-const port = process.env.DB_PORT;
-const name = process.env.DB_NAME;
-
-let _client;
-let _db;
-
+var MongoClient = require('mongodb').MongoClient;
+var Server = require('mongodb').Server;
+var host = process.env.DB_HOST;
+var port = process.env.DB_PORT;
+var name = process.env.DB_NAME;
+var _client;
+var _db;
 module.exports = {
-    connectToDatabase: function(callback) {
-        MongoClient.connect(new Server(host, port), function(err, client) {
+    connectToDatabase: function (callback) {
+        MongoClient.connect(new Server(host, port), function (err, client) {
             if (err) {
                 callback(err);
-            } else {
+            }
+            else {
                 _client = client;
                 _db = client.db(name);
                 callback(undefined, _db);
             }
         });
     },
-    db: function() {
+    db: function () {
         return _db;
     },
-    closeDatabase: function() {
+    closeDatabase: function () {
         _client.close();
     }
 };
