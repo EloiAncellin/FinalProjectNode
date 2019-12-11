@@ -1,5 +1,5 @@
 require('custom-env').env(process.env.APP_ENV);
-const utils = require('./mongoUtils');
+const utils = require('./utils/mongoUtils');
 const express = require('express');
 const app = express();
 
