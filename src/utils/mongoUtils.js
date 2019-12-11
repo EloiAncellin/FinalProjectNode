@@ -5,6 +5,7 @@ const host = process.env.DB_HOST;
 const port = process.env.DB_PORT;
 const name = process.env.DB_NAME;
 
+var _client;
 var _db;
 
 module.exports = {
@@ -13,12 +14,16 @@ module.exports = {
             if (err) {
                 callback(err);
             } else {
+                _client = client;
                 _db = client.db(name);
-                callback(false, _db);
+                callback(undefined, _db);
             }
         });
     },
     db: function() {
         return _db;
+    },
+    closeDatabase: function() {
+        _client.close();
     }
 };
