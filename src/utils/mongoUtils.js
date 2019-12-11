@@ -1,4 +1,3 @@
-require('custom-env').env(process.env.APP_ENV);
 const MongoClient = require('mongodb').MongoClient;
 const Server = require('mongodb').Server;
 const host = process.env.DB_HOST;

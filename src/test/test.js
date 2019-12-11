@@ -1,3 +1,4 @@
+require('custom-env').env(process.env.APP_ENV);
 const expect = require('chai').expect;
 const utils = require('../utils/mongoUtils');
 const sum = require('../utils/sum.js');
