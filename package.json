@@ -15,7 +15,7 @@
         "build": "node_modules/typescript/bin/tsc",
         "start": "npm run build && node src/dist/app.js",
         "dev": "nodemon -e ts --exec \"npm run start\"",
-        "test": "npm run build && mocha src/test",
+        "test": "npm run build && mocha src/dist/test",
         "coverage": "nyc npm run test",
         "test-travis": "npm run build && nyc --reporter=lcov npm run test",
         "coveralls": "cat coverage/lcov.info | coveralls"
