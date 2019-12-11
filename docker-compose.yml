@@ -13,6 +13,4 @@ services:
 
     mongodb:
         image: "mongo:${DB_TAG}"
-        ports:
-            - "${DB_PORT}:${DB_PORT}"
         container_name: mongodb
