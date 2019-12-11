@@ -11,7 +11,7 @@ describe('Some simple test', () => {
 });
 
 describe('Database testing', () => {
-    it('connect to db', (done) => {
+    it('connect to database', (done) => {
         utils.connectToDatabase(function(err, db) {
             _db = db;
             expect(err).to.not.exist;
