@@ -2,14 +2,19 @@
     "name": "Node-it",
     "version": "0.1.0",
     "dependencies": {
+        "@types/mocha": "^5.2.7",
+        "@types/node": "^12.12.17",
         "body-parser": "^1.19.0",
         "custom-env": "^1.0.2",
         "ejs": "^2.7.4",
         "express": "^4.17.1",
-        "mongodb": "^3.3.5"
+        "mongodb": "^3.3.5",
+        "typescript": "^3.7.3"
     },
     "scripts": {
-        "start": "nodemon src/app.js",
+        "build": "node_modules/typescript/bin/tsc",
+        "start": "npm run build && node src/dist/app.js",
+        "dev": "nodemon -e ts --exec \"npm run start\"",
         "test": "mocha src/test",
         "coverage": "nyc npm run test",
         "test-travis": "nyc --reporter=lcov npm run test",
