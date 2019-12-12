@@ -8,7 +8,7 @@ let _client;
 let _db;
 
 export = {
-    connectToDatabase: function(callback) {
+    connect: function(callback) {
         MongoClient.connect(new Server(host, port), function(err, client) {
             if (err) {
                 callback(err);
@@ -19,10 +19,10 @@ export = {
             }
         });
     },
-    getDb: function() {
+    db: function() {
         return _db;
     },
-    closeDatabase: function() {
+    close: function() {
         _client.close();
     }
 };

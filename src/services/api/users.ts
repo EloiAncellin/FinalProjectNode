@@ -1,5 +1,5 @@
 import User from '../../models/user';
-const db = require('../../utils/mongoUtils').getDb();
+const db = require('../../utils/mongoUtils').db();
 
 export = {
     getUserByEmail: function(email: string): Promise<User> {

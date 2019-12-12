@@ -1,9 +1,9 @@
 require('custom-env').env(process.env.APP_ENV);
-import utils from './utils/mongoUtils';
+import mongoUtils from './utils/mongoUtils';
 const express = require('express');
 const app = express();
 
-utils.connectToDatabase(function(err, db) {
+mongoUtils.connect(function(err, db) {
     if (err) throw err;
 
     app.use('/', require('./views/home'));

@@ -1,5 +1,5 @@
 require('custom-env').env(process.env.APP_ENV);
-import utils from '../utils/mongoUtils';
+import mongoUtils from '../utils/mongoUtils';
 import sum from '../utils/sum';
 const expect = require('chai').expect;
 let _db;
@@ -12,7 +12,7 @@ describe('Some simple test', () => {
 
 describe('Database testing', () => {
     it('connect to database', (done) => {
-        utils.connectToDatabase(function(err, db) {
+        mongoUtils.connect(function(err, db) {
             _db = db;
             expect(err).to.not.exist;
             done();
@@ -35,6 +35,6 @@ describe('Database testing', () => {
     });
 
     it('close database', () => {
-        utils.closeDatabase();
+        mongoUtils.close();
     });
 });
