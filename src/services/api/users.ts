@@ -1,23 +1,23 @@
+import Response from '../../models/response';
 import User from '../../models/user';
 const db = require('../../utils/mongoUtils').db();
 
 export = {
-    getUserByEmail: function(email: string): Promise<User> {
+    getUserByEmail: function(email: string): Promise<Response<User>> {
         return new Promise((resolve, reject) => {
-            db.collection('users').findOne({ email: email }, function(err, result) {
-                if (err) {
-                    reject(err);
+            db.collection('users').findOne({ email: email }).then((result) => {
+                if (result) {
+                    const user = new User(result._id, result.email, null, result.firstName, result.lastName);
+                    resolve(new Response(Response.SUCCESS, user));
                 } else {
-                    if (result) {
-                        resolve(new User(result._id, result.email, null, result.firstName, result.lastName));
-                    } else {
-                        reject(`Could not find user with email ${email}.`);
-                    }
+                    reject(new Response(Response.ERROR, `Could not find user with email ${email}.`));
                 }
+            }).catch((err) => {
+                reject(new Response(Response.ERROR, err));
             });
         });
     },
-    createUser: function(user: User): Promise<User> {
+    createUser: function(user: User): Promise<Response<User>> {
         return new Promise((resolve, reject) => {
             const obj = {
                 email: user.email,
@@ -25,13 +25,11 @@ export = {
                 firstName: user.firstName,
                 lastName: user.lastName
             };
-            db.collection('users').insertOne(obj, function(err, result) {
-                if (err) {
-                    reject(err);
-                } else {
-                    user.id = result.insertedId;
-                    resolve(user);
-                }
+            db.collection('users').insertOne(obj).then((result) => {
+                user.id = result.insertedId;
+                resolve(new Response(Response.SUCCESS, user));
+            }).catch((err) => {
+                reject(new Response(Response.ERROR, err));
             });
         });
     }
