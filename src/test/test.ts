@@ -12,24 +12,43 @@ describe('Some simple test', () => {
 
 describe('Database testing', () => {
     it('connect to database', (done) => {
-        mongoUtils.connect(function(err, db) {
+        mongoUtils.connect().then((db) => {
             _db = db;
-            expect(err).to.not.exist;
             done();
-        });
+        }).catch(done);
+    });
+
+    it('clear database', (done) => {
+        mongoUtils.clear().then((result) => {
+            done();
+        }).catch(done);
+    });
+
+    it('initialize database', (done) => {
+        mongoUtils.init().then((result) => {
+            done();
+        }).catch(done);
     });
 
     it('write user to database', (done) => {
-        _db.collection('users').insertOne({ 'name': 'omar aflak' }, function(err, result) {
+        _db.collection('users').insertOne({ email: 'toto1@ece.fr' }, function(err, result) {
             expect(err).to.not.exist;
             done();
         });
     });
 
     it('read user from database', (done) => {
-        _db.collection('users').findOne({}, function(err, result) {
+        _db.collection('users').findOne({ email: 'toto1@ece.fr' }, function(err, result) {
             expect(err).to.not.exist;
-            expect(result.name).to.equal('omar aflak');
+            expect(result).to.not.null;
+            done();
+        });
+    });
+
+    it('read non existant user from database', (done) => {
+        _db.collection('users').findOne({ email: 'xxx' }, function(err, result) {
+            expect(err).to.not.exist;
+            expect(result).to.null;
             done();
         });
     });

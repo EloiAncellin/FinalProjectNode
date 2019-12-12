@@ -8,15 +8,13 @@ let _client;
 let _db;
 
 export = {
-    connect: function(callback) {
-        MongoClient.connect(new Server(host, port), function(err, client) {
-            if (err) {
-                callback(err);
-            } else {
+    connect: function() {
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(new Server(host, port)).then((client) => {
                 _client = client;
                 _db = client.db(name);
-                callback(undefined, _db);
-            }
+                resolve(_db);
+            }).catch(reject);
         });
     },
     db: function() {
@@ -24,5 +22,20 @@ export = {
     },
     close: function() {
         _client.close();
+    },
+    clear: function() {
+        return new Promise((resolve, reject) => {
+            _db.dropDatabase().then((result) => {
+                if (result) {
+                    resolve(true);
+                } else {
+                    reject('Could not drop database.');
+                }
+            }).catch(reject);
+        });
+    },
+    init: function() {
+        _db = _client.db(name);
+        return _db.collection('users').createIndex( { "email": 1 }, { unique: true } );
     }
 };
