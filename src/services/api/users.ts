@@ -1,4 +1,4 @@
-import User from '../../interfaces/user';
+import User from '../../models/user';
 const db = require('../../utils/mongoUtils').getDb();
 
 export = {
@@ -6,7 +6,7 @@ export = {
         return new Promise((resolve, reject) => {
             db.collection('users').findOne({ email: email }, function(err, result) {
                 if (err) {
-                    reject('Unexpected error...');
+                    reject(err);
                 } else {
                     if (result) {
                         resolve(new User(result._id, result.email, null, result.firstName, result.lastName));
@@ -16,10 +16,23 @@ export = {
                 }
             });
         });
+    },
+    createUser: function(user: User): Promise<User> {
+        return new Promise((resolve, reject) => {
+            const obj = {
+                email: user.email,
+                password: user.password,
+                firstName: user.firstName,
+                lastName: user.lastName
+            };
+            db.collection('users').insertOne(obj, function(err, result) {
+                if (err) {
+                    reject(err);
+                } else {
+                    user.id = result.insertedId;
+                    resolve(user);
+                }
+            });
+        });
     }
-    // createUser: function(email: string, password: string, callback: (error: string, result: User) => void) {
-    //     db.collection('users').insertOne({ 'name': 'omar aflak' }, function(err, result) {
-    //         if (err) res.send('oups...')
-    //     });
-    // }
 }
