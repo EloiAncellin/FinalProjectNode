@@ -28,6 +28,7 @@ export = {
             };
             db.collection('users').insertOne(obj).then((result) => {
                 user.id = result.insertedId;
+                user.password = null;
                 resolve(new Response(Response.SUCCESS, user));
             }).catch((err) => {
                 reject(new Response(Response.ERROR, err));
