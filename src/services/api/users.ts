@@ -1,6 +1,7 @@
 import Response from '../../models/response';
 import User from '../../models/user';
 const db = require('../../utils/mongoUtils').db();
+const hash = require('password-hash');
 
 export = {
     getUserByEmail: function(email: string): Promise<Response<User>> {
@@ -21,7 +22,7 @@ export = {
         return new Promise((resolve, reject) => {
             const obj = {
                 email: user.email,
-                password: user.password,
+                password: hash.generate(user.password),
                 firstName: user.firstName,
                 lastName: user.lastName
             };
