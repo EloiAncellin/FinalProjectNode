@@ -4,9 +4,9 @@ const express = require('express');
 const app = express();
 
 mongoUtils.connect().then(mongoUtils.clear).then(mongoUtils.init).then((res) => {
-    const web_port = process.env.WEB_PORT
+    const port = process.env.WEB_PORT
     app.use('/', require('./views/home'));
-    app.listen(web_port, () => console.log(`Server listening on port ${web_port}!`));
+    app.listen(port, () => console.log(`Server listening on port ${port}!`));
 }).catch((err) => {
     throw err;
 });
