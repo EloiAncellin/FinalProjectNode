@@ -5,16 +5,9 @@ const app = express();
 
 utils.connectToDatabase(function(err, db) {
     if (err) throw err;
-    app.get('/', (req, res) => {
-        db.collection('users').insertOne({ 'name': 'omar aflak' }, function(err, result){
-            if (err) res.send('oups...')
-            db.collection('users').findOne({}, function(err, result){
-                if (err) res.send('oups...')
-                res.send(JSON.stringify(result))
-            });
-        });
-    });
+
+    app.use('/', require('./views/home'));
 
     const web_port = process.env.WEB_PORT
-    app.listen(web_port, () => console.log(`Example app listening on port ${web_port}!`))
+    app.listen(web_port, () => console.log(`Server listening on port ${web_port}!`))
 });

@@ -1,8 +1,7 @@
 require('custom-env').env(process.env.APP_ENV);
-const expect = require('chai').expect;
 import utils from '../utils/mongoUtils';
 import sum from '../utils/sum';
-
+const expect = require('chai').expect;
 let _db;
 
 describe('Some simple test', () => {

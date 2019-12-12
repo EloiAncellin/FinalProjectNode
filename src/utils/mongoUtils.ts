@@ -7,7 +7,7 @@ const name = process.env.DB_NAME;
 let _client;
 let _db;
 
-export default {
+export = {
     connectToDatabase: function(callback) {
         MongoClient.connect(new Server(host, port), function(err, client) {
             if (err) {
@@ -19,7 +19,7 @@ export default {
             }
         });
     },
-    db: function() {
+    getDb: function() {
         return _db;
     },
     closeDatabase: function() {
