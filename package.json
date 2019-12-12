@@ -14,7 +14,7 @@
     "scripts": {
         "build": "node_modules/typescript/bin/tsc",
         "start": "npm run build && node src/dist/app.js",
-        "dev": "nodemon -e ts --exec \"npm run start\"",
+        "dev": "nodemon -e ts --exec \"npm run start || exit 1\"",
         "test": "npm run build && mocha src/dist/test",
         "coverage": "nyc npm run test",
         "test-travis": "nyc --reporter=lcov npm run test",
