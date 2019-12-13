@@ -3,8 +3,6 @@ const host = process.env.DB_HOST;
 const port = process.env.DB_PORT;
 const name = process.env.DB_NAME;
 
-let _db;
-
 export = {
     connect: function() {
         return mongoose.connect(`mongodb://${host}:${port}/${name}`, { useNewUrlParser: true, useUnifiedTopology: true });

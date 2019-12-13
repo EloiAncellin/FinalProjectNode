@@ -4,12 +4,9 @@ import User from '../api/models/user';
 const mongoose = require('mongoose');
 const expect = require('chai').expect;
 
-let _db;
-
 describe('Database testing', () => {
     it('connect to database', (done) => {
         mongoUtils.connect().then(() => {
-            _db = mongoose.connection.db;
             done();
         }).catch(done);
     });
