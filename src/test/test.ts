@@ -1,6 +1,6 @@
 require('custom-env').env(process.env.APP_ENV);
-import mongoUtils from '../utils/mongoUtils';
-import User from '../api/models/user';
+const mongoUtils = require('../utils/mongoUtils');
+const User = require('../api/models/user');
 const mongoose = require('mongoose');
 const expect = require('chai').expect;
 

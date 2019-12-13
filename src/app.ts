@@ -1,5 +1,5 @@
 require('custom-env').env(process.env.APP_ENV);
-import mongoUtils from './utils/mongoUtils';
+const mongoUtils = require('./utils/mongoUtils');
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
@@ -20,3 +20,5 @@ mongoUtils.connect().then(mongoUtils.clear).then(() => {
 }).catch((err) => {
     throw err;
 });
+
+export = {};
