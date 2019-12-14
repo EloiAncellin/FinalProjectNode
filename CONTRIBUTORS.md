@@ -1,4 +1,4 @@
-FinalProjectNode contributors (sorted alphabetically)
+Metrics contributors
 ============================================
 
 * **[AFLAK Omar](https://github.com/OmarAflak)**
