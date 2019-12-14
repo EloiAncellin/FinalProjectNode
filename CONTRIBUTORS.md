@@ -1,4 +1,4 @@
-Metrics contributors
+Contributors
 ============================================
 
 * **[AFLAK Omar](https://github.com/OmarAflak)**
