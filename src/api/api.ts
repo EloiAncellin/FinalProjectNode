@@ -8,8 +8,9 @@ router.post('/users/register', userController.create);
 router.post('/users/authenticate', userController.authenticate);
 router.get('/users/me', auth.ensureAuthenticated, userController.getPersonalDetails);
 
-router.post('/metrics', auth.ensureAuthenticated, metricController.create);
-router.get('/metrics/:name', auth.ensureAuthenticated, metricController.getByName);
 router.get('/metrics', auth.ensureAuthenticated, metricController.getNames);
+router.get('/metrics/:name', auth.ensureAuthenticated, metricController.getByName);
+router.post('/metrics', auth.ensureAuthenticated, metricController.create);
+router.put('/metrics', auth.ensureAuthenticated, metricController.updateById);
 
 export = router;

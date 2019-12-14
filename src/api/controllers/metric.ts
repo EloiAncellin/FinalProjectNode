@@ -30,5 +30,25 @@ export = {
         }).catch((err) => {
             res.status(400).json(new Response(Response.ERROR, err));
         });
+    },
+    updateById: function(req, res) {
+        Metric.findOne({
+            _id: req.body.id,
+            userId: req.body.user._id
+        }).then((doc) => {
+            if (!doc) {
+                res.status(400).json(new Response(Response.ERROR, `Could not find metric with id=${req.body.id}`));
+            } else {
+                doc.name = req.body.name;
+                doc.value = req.body.value;
+                doc.save().then((doc) => {
+                    res.status(200).json(new Response(Response.SUCCESS, doc));
+                }).catch((err) => {
+                    res.status(400).json(new Response(Response.ERROR, err));
+                });
+            }
+        }).catch((err) => {
+            res.status(400).json(new Response(Response.ERROR, err));
+        })
     }
 }
