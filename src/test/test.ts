@@ -1,11 +1,15 @@
 require('custom-env').env(process.env.APP_ENV);
-const expect = require('chai').expect;
+const chai = require('chai');
 const request = require('supertest');
+const deepEqualInAnyOrder = require('deep-equal-in-any-order');
 const mongoUtils = require('../utils/mongoUtils');
 const expressUtils = require('../utils/expressUtils');
 const User = require('../api/models/user');
 const Response = require('../api/models/response');
 
+const { expect } = chai;
+
+chai.use(deepEqualInAnyOrder);
 let _app;
 
 describe('Tests', () => {
@@ -138,7 +142,7 @@ describe('Tests', () => {
                     .then(response => {
                         expect(response.body.status).to.equal(Response.SUCCESS);
                         const cleaned = response.body.result.map((metric) => (({_id, userId, date, __v, ...x}) => x)(metric));
-                        expect(cleaned).to.deep.equal(metrics);
+                        expect(cleaned).to.deep.equalInAnyOrder(metrics);
                         done();
                     }).catch(done);
             });
@@ -150,7 +154,7 @@ describe('Tests', () => {
                     .expect(200)
                     .then(response => {
                         expect(response.body.status).to.equal(Response.SUCCESS);
-                        expect(response.body.result).to.deep.equal(metricNames);
+                        expect(response.body.result).to.deep.equalInAnyOrder(metricNames);
                         done();
                     }).catch(done);
             });
@@ -163,7 +167,7 @@ describe('Tests', () => {
                     .then(response => {
                         expect(response.body.status).to.equal(Response.SUCCESS);
                         const cleaned = response.body.result.map((metric) => (({_id, userId, date, __v, ...x}) => x)(metric));
-                        expect(cleaned).to.deep.equal(metrics0);
+                        expect(cleaned).to.deep.equalInAnyOrder(metrics0);
                         done();
                     }).catch(done);
             })
