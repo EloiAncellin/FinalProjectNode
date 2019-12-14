@@ -9,12 +9,16 @@
         "custom-env": "^1.0.2",
         "ejs": "^2.7.4",
         "express": "^4.17.1",
+        "fs": "0.0.1-security",
+        "jsonwebtoken": "^8.5.1",
         "mongodb": "^3.3.5",
         "mongoose": "^5.8.1",
+        "node-rsa": "^1.0.7",
         "typescript": "^3.7.3"
     },
     "scripts": {
-        "build": "node_modules/typescript/bin/tsc",
+        "build": "node_modules/typescript/bin/tsc && npm run generate-keys",
+        "generate-keys": "node src/dist/keys/generate.js",
         "start": "npm run build && node src/dist/app.js",
         "dev": "nodemon -e ts --exec \"npm run start || exit 1\"",
         "test": "npm run build && mocha src/dist/test",
