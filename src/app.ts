@@ -15,7 +15,7 @@ mongoUtils.connect().then(() => {
 
     // start server
     const server = app.listen(process.env.WEB_PORT, () => {
-        console.log(`Server listening on port ${server.address().port}!`)
+        console.log(`Server listening on port ${server.address().port}!`);
     });
 }).catch((err) => {
     throw err;
