@@ -112,17 +112,22 @@ describe('Tests', () => {
 
         describe('/api/metrics', () => {
             const metricNames = ['metric1', 'metric2', 'metric3'];
-            const metrics = [
+            const metrics0 = [
                 { name: metricNames[0], value: 25 },
                 { name: metricNames[0], value: 42 },
-                { name: metricNames[0], value: 21 },
+                { name: metricNames[0], value: 21 }
+            ];
+            const metrics1 = [
                 { name: metricNames[1], value: 15 },
                 { name: metricNames[1], value: 65 },
-                { name: metricNames[1], value: 47 },
+                { name: metricNames[1], value: 47 }
+            ];
+            const metrics2 = [
                 { name: metricNames[2], value: 96 },
                 { name: metricNames[2], value: 36 },
                 { name: metricNames[2], value: 88 }
             ];
+            const metrics = metrics0.concat(metrics1, metrics2);
 
             it('create metrics', (done) => {
                 request(_app)
@@ -138,7 +143,7 @@ describe('Tests', () => {
                     }).catch(done);
             });
 
-            it('retrieve a metric', (done) => {
+            it('retrieve metric names', (done) => {
                 request(_app)
                     .get('/api/metrics')
                     .set({ authorization: token })
@@ -149,6 +154,19 @@ describe('Tests', () => {
                         done();
                     }).catch(done);
             });
+
+            it('retrieve metric values', (done) => {
+                request(_app)
+                    .get(`/api/metrics/${metricNames[0]}`)
+                    .set({ authorization: token })
+                    .expect(200)
+                    .then(response => {
+                        expect(response.body.status).to.equal(Response.SUCCESS);
+                        const cleaned = response.body.result.map((metric) => (({_id, userId, date, __v, ...x}) => x)(metric));
+                        expect(cleaned).to.deep.equal(metrics0);
+                        done();
+                    }).catch(done);
+            })
         })
     });
 });
