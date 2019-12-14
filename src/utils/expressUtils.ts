@@ -21,8 +21,5 @@ export = {
     },
     stop: () => {
         _server.close();
-    },
-    getApp: () => {
-        return app;
     }
 };
