@@ -2,12 +2,10 @@ require('custom-env').env(process.env.APP_ENV);
 const expect = require('chai').expect;
 const request = require('supertest')
 const mongoUtils = require('../utils/mongoUtils');
+const expressUtils = require('../utils/expressUtils');
 const User = require('../api/models/user');
-const bodyParser = require('body-parser');
-const express = require('express');
-const app = express();
 
-let server;
+let _app;
 
 describe('Tests', () => {
     before((done) => {
@@ -57,20 +55,14 @@ describe('Tests', () => {
                 process.env.WEB_PORT = String(Number(process.env.WEB_PORT) + 1);
             }
 
-            app.use(bodyParser.urlencoded({ extended: false }));
-            app.use(bodyParser.json());
-
-            // routes
-            app.use('/', require('../views/home'));
-            app.use('/api', require('../api/api'));
-
-            // start server
-            server = app.listen(process.env.WEB_PORT, done);
+            expressUtils.start().then((app) => {
+                _app = app;
+                done();
+            }).catch(done);
         });
 
         after((done) => {
-            server.close();
-            process.env.WEB_PORT = process.env.OLD_WEB_PORT;
+            expressUtils.stop();
             done();
         });
 
@@ -82,7 +74,7 @@ describe('Tests', () => {
                     firstName: 'toto02',
                     lastName: 'tata02'
                 };
-                request(app)
+                request(_app)
                     .post('/api/users/register')
                     .send(user)
                     .expect(200)
@@ -100,7 +92,7 @@ describe('Tests', () => {
                     email: 'toto02@ece.fr',
                     password: 'password'
                 };
-                request(app)
+                request(_app)
                     .post('/api/users/authenticate')
                     .send(cred)
                     .expect(200)
