@@ -33,7 +33,7 @@ export = {
     },
     updateById: function(req, res) {
         Metric.findOne({
-            _id: req.body.id,
+            _id: req.params.id,
             userId: req.body.user._id
         }).then((doc) => {
             if (!doc) {
@@ -53,7 +53,7 @@ export = {
     },
     deleteById: function(req, res) {
         Metric.deleteOne({
-            _id: req.body.id,
+            _id: req.params.id,
             userId: req.body.user._id
         }).then((response) => {
             res.status(200).json(new Response(Response.SUCCESS, response));
