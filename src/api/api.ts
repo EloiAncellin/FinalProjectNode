@@ -12,5 +12,6 @@ router.get('/metrics', auth.ensureAuthenticated, metricController.getNames);
 router.get('/metrics/:name', auth.ensureAuthenticated, metricController.getByName);
 router.post('/metrics', auth.ensureAuthenticated, metricController.create);
 router.put('/metrics', auth.ensureAuthenticated, metricController.updateById);
+router.delete('/metrics', auth.ensureAuthenticated, metricController.deleteById);
 
 export = router;

@@ -50,5 +50,15 @@ export = {
         }).catch((err) => {
             res.status(400).json(new Response(Response.ERROR, err));
         })
+    },
+    deleteById: function(req, res) {
+        Metric.deleteOne({
+            _id: req.body.id,
+            userId: req.body.user._id
+        }).then((response) => {
+            res.status(200).json(new Response(Response.SUCCESS, response));
+        }).catch((err) => {
+            res.status(400).json(new Response(Response.ERROR, err));
+        });
     }
 }
