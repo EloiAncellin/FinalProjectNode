@@ -18,7 +18,7 @@ APP_ENV=dev docker-compose up
 # Run tests and check coverage
 
 ```
-docker exec -it web npm run converage
+docker exec -it web npm run coverage
 ```
 
 # [Contributors](https://github.com/EloiAncellin/FinalProjectNode/blob/master/CONTRIBUTORS.md)
