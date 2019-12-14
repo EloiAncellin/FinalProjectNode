@@ -7,12 +7,15 @@ colors.enable();
 let _server;
 
 const cheezyLog = () => {
-    console.log(colors.brightMagenta.bold('===  cheezy log activated  ==='));
-    console.log(colors.brightGreen.bold('Congratulation! You made it so far, wow! The server is now up and running :)'));
-    console.log(colors.brightYellow.underline(`http://localhost:${_server.address().port}`));
-    console.log(colors.bold('Please rate this project 💯'));
-    console.log(colors.brightCyan.bold('Goodbye friend.'));
-    console.log(colors.brightMagenta.bold('=== cheezy log deactivated ==='));
+    const logs = [
+        colors.brightMagenta.bold('===  cheezy log activated  ==='),
+        colors.brightGreen.bold('Congratulation! You made it so far, wow! The server is now up and running :)'),
+        colors.brightYellow.underline(`http://localhost:${_server.address().port}`),
+        colors.bold('Please rate this project 💯'),
+        colors.brightCyan.bold('Goodbye friend.'),
+        colors.brightMagenta.bold('=== cheezy log deactivated ===')
+    ]
+    console.log(logs.join('\n'));
 }
 
 export = {
