@@ -3,3 +3,5 @@ node_modules
 coverage
 /**/*.js
 dist
+src/keys/public.key
+src/keys/private.key

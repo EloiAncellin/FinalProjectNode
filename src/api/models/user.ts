@@ -32,7 +32,7 @@ userSchema.pre('save', function(this: any, next) {
     next();
 });
 
-userSchema.methods.comparePassword = function(candidatePassword, callback) {
+userSchema.methods.comparePassword = function(candidatePassword) {
     return new Promise((resolve, reject) => {
         bcrypt.compare(candidatePassword, this.password).then((match) => {
             if (match) {
