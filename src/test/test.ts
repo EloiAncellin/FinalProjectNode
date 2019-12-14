@@ -128,12 +128,12 @@ describe('Tests', () => {
                 request(_app)
                     .post('/api/metrics')
                     .set({ authorization: token })
-                    .send(metrics[0])
+                    .send({ metrics: metrics })
                     .expect(200)
                     .then(response => {
                         expect(response.body.status).to.equal(Response.SUCCESS);
-                        expect(response.body.result.value).to.equal(metrics[0].value);
-                        expect(response.body.result.name).to.equal(metrics[0].name);
+                        const cleaned = response.body.result.map((metric) => (({_id, userId, date, __v, ...x}) => x)(metric));
+                        expect(cleaned).to.deep.equal(metrics);
                         done();
                     }).catch(done);
             });
@@ -145,7 +145,7 @@ describe('Tests', () => {
                     .expect(200)
                     .then(response => {
                         expect(response.body.status).to.equal(Response.SUCCESS);
-                        expect(response.body.result[0]).to.equal(metricNames[0]);
+                        expect(response.body.result).to.deep.equal(metricNames);
                         done();
                     }).catch(done);
             });
