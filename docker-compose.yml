@@ -12,7 +12,7 @@ services:
             - "./.env:/code/.env"
         container_name: web
         environment:
-            - APP_ENV=dev
+            - APP_ENV=${APP_ENV}
 
     mongodb:
         image: "mongo:${DB_TAG}"
