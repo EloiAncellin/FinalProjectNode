@@ -6,13 +6,19 @@ Metrics app, using NodeJS, Typescript, MongoDB.
 # Get Started
 
 ```
-docker-compose up
+docker-compose up --build
 ```
 
-# Tests
+# Development Environment
 
 ```
-docker exec -it web npm test
+APP_ENV=dev docker-compose up --build
+```
+
+# Run tests and check coverage
+
+```
+docker exec -it web npm run converage
 ```
 
 # [Contributors](https://github.com/EloiAncellin/FinalProjectNode/blob/master/CONTRIBUTORS.md)
