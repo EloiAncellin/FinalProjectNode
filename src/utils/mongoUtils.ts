@@ -5,7 +5,11 @@ const name = process.env.DB_NAME;
 
 export = {
     connect: function() {
-        return mongoose.connect(`mongodb://${host}:${port}/${name}`, { useNewUrlParser: true, useUnifiedTopology: true });
+        return mongoose.connect(`mongodb://${host}:${port}/${name}`, {
+            useCreateIndex: true,
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
     },
     clear: function() {
         return mongoose.connection.db.dropDatabase();
