@@ -6,13 +6,13 @@ Metrics app, using NodeJS, Typescript, MongoDB.
 # Get Started
 
 ```
-docker-compose up --build
+docker-compose up
 ```
 
 # Development Environment
 
 ```
-APP_ENV=dev docker-compose up --build
+APP_ENV=dev docker-compose up
 ```
 
 # Run tests and check coverage
