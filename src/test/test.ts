@@ -1,6 +1,6 @@
 require('custom-env').env(process.env.APP_ENV);
 const expect = require('chai').expect;
-const request = require('supertest')
+const request = require('supertest');
 const mongoUtils = require('../utils/mongoUtils');
 const expressUtils = require('../utils/expressUtils');
 const User = require('../api/models/user');
@@ -12,13 +12,23 @@ describe('Tests', () => {
     before((done) => {
         mongoUtils.connect().then(() => {
             mongoUtils.clear().then(() => {
-                done();
+                process.env.VERBOSE = '0';
+                process.env.OLD_WEB_PORT = process.env.WEB_PORT;
+                process.env.WEB_PORT = String(Number(process.env.WEB_PORT) + 1);
+
+                expressUtils.start().then((app) => {
+                    _app = app;
+                    done();
+                }).catch(done);
             }).catch(done);
         }).catch(done);
     });
 
     after((done) => {
         mongoUtils.close();
+        process.env.VERBOSE = '1';
+        process.env.WEB_PORT = process.env.OLD_WEB_PORT;
+        expressUtils.stop();
         done();
     });
 
@@ -50,85 +60,96 @@ describe('Tests', () => {
     });
 
     describe('Integration Tests', () => {
+        let token;
+        const user = {
+            email: 'toto02@ece.fr',
+            password: 'password',
+            firstName: 'toto02',
+            lastName: 'tata02'
+        }
+
         before((done) => {
-            process.env.VERBOSE = '0';
-            process.env.OLD_WEB_PORT = process.env.WEB_PORT;
-            process.env.WEB_PORT = String(Number(process.env.WEB_PORT) + 1);
+            request(_app)
+                .post('/api/users/register')
+                .send(user)
+                .expect(200)
+                .then(response => {
+                    expect(response.body.status).to.equal(Response.SUCCESS);
+                    expect(response.body.result._id).to.exist;
+                    expect(response.body.result.email).to.equal(user.email);
+                    expect(response.body.result.firstName).to.equal(user.firstName);
+                    expect(response.body.result.lastName).to.equal(user.lastName);
 
-            expressUtils.start().then((app) => {
-                _app = app;
-                done();
-            }).catch(done);
+                    request(_app)
+                        .post('/api/users/authenticate')
+                        .send({ email: user.email, password: user.password })
+                        .expect(200)
+                        .then(response => {
+                            expect(response.body.status).to.equal(Response.SUCCESS);
+                            expect(response.body.result.token).to.exist;
+                            token = response.body.result.token;
+                            done();
+                        }).catch(done);
+                }).catch(done);
         });
 
-        after((done) => {
-            process.env.VERBOSE = '1';
-            process.env.WEB_PORT = process.env.OLD_WEB_PORT;
-            expressUtils.stop();
-            done();
-        });
-
-        describe('POST /api/users/register', () => {
-            it('responds with json user', (done) => {
-                const user = {
-                    email: 'toto02@ece.fr',
-                    password: 'password',
-                    firstName: 'toto02',
-                    lastName: 'tata02'
-                };
+        describe('/api/users', () => {
+            it('have access to personal resources', (done) => {
                 request(_app)
-                    .post('/api/users/register')
-                    .send(user)
+                    .get('/api/users/me')
+                    .set({ authorization: token })
                     .expect(200)
                     .then(response => {
+                        expect(response.body.status).to.equal(Response.SUCCESS);
                         expect(response.body.result.email).to.equal(user.email);
                         expect(response.body.result.firstName).to.equal(user.firstName);
                         expect(response.body.result.lastName).to.equal(user.lastName);
+                        expect(response.body.result.password).to.not.exist;
                         done();
                     }).catch(done);
             });
         });
 
-        describe('POST /api/users/authenticate', () => {
-            it('responds with web token', (done) => {
-                const cred = {
-                    email: 'toto02@ece.fr',
-                    password: 'password'
-                };
+        describe('/api/metrics', () => {
+            const metricNames = ['metric1', 'metric2', 'metric3'];
+            const metrics = [
+                { name: metricNames[0], value: 25 },
+                { name: metricNames[0], value: 42 },
+                { name: metricNames[0], value: 21 },
+                { name: metricNames[1], value: 15 },
+                { name: metricNames[1], value: 65 },
+                { name: metricNames[1], value: 47 },
+                { name: metricNames[2], value: 96 },
+                { name: metricNames[2], value: 36 },
+                { name: metricNames[2], value: 88 }
+            ];
+
+            it('create metrics', (done) => {
                 request(_app)
-                    .post('/api/users/authenticate')
-                    .send(cred)
+                    .post('/api/metrics')
+                    .set({ authorization: token })
+                    .send(metrics[0])
                     .expect(200)
                     .then(response => {
-                        expect(response.body.result.token).to.exist;
+                        expect(response.body.status).to.equal(Response.SUCCESS);
+                        expect(response.body.result.value).to.equal(metrics[0].value);
+                        expect(response.body.result.name).to.equal(metrics[0].name);
                         done();
                     }).catch(done);
             });
 
-            it('allows access to personal resources', (done) => {
-                const cred = {
-                    email: 'toto02@ece.fr',
-                    password: 'password'
-                };
+            it('retrieve a metric', (done) => {
                 request(_app)
-                    .post('/api/users/authenticate')
-                    .send(cred)
+                    .get('/api/metrics')
+                    .set({ authorization: token })
                     .expect(200)
                     .then(response => {
-                        const token = response.body.result.token;
-                        expect(token).to.exist;
-                        request(_app)
-                            .get('/api/users/me')
-                            .set({ authorization: token })
-                            .expect(200)
-                            .then(response => {
-                                expect(response.body.status).to.equal(Response.SUCCESS);
-                                expect(response.body.result.email).to.equal(cred.email);
-                                done();
-                            }).catch(done);
+                        expect(response.body.status).to.equal(Response.SUCCESS);
+                        expect(response.body.result[0]).to.equal(metricNames[0]);
+                        done();
                     }).catch(done);
             });
-        });
+        })
     });
 });
 
