@@ -1,23 +1,9 @@
 require('custom-env').env(process.env.APP_ENV);
 const mongoUtils = require('./utils/mongoUtils');
-const bodyParser = require('body-parser');
-const express = require('express');
-const app = express();
+const expressUtils = require('./utils/expressUtils');
 
-mongoUtils.connect().then(() => {
-    // parse data in body
-    app.use(bodyParser.urlencoded({ extended: false }));
-    app.use(bodyParser.json());
-
-    // routes
-    app.use('/', require('./views/home'));
-    app.use('/api', require('./api/api'));
-
-    // start server
-    const server = app.listen(process.env.WEB_PORT, () => {
-        console.log(`Server listening on port ${server.address().port}!`);
-    });
-}).catch((err) => {
+mongoUtils.connect()
+.then(expressUtils.start).catch((err) => {
     throw err;
 });
 
