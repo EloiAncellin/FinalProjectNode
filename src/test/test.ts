@@ -10,7 +10,7 @@ let _app;
 
 describe('Tests', () => {
     before((done) => {
-        mongoUtils.connect().then(() => {
+        mongoUtils.connect(true).then(() => {
             mongoUtils.clear().then(() => {
                 process.env.VERBOSE = '0';
                 process.env.OLD_WEB_PORT = process.env.WEB_PORT;
