@@ -1,6 +1,6 @@
-if [ -z "$DEV" ]
+if [ "$APP_ENV" = "dev" ]
 then
-    npm run start
-else
     npm run dev
+else
+    npm run start
 fi

@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 
-mongoUtils.connect().then(mongoUtils.clear).then(() => {
+mongoUtils.connect().then(() => {
     // parse data in body
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
