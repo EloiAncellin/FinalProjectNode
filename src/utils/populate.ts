@@ -5,8 +5,16 @@ const mongoUtils = require('./mongoUtils');
 const User = require('../api/models/user');
 const Metric = require('../api/models/metric');
 
+const randomDate = (start: Date, end: Date) => {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}
+
+const randomNumber = (start: number, end: number) => {
+    return start + Math.random() * (end - start);
+}
+
 mongoUtils.connect().then(() => {
-    const profiles = [
+    const profiles: any[] = [
         {
             user: {
                 email: 'toto01@ece.fr',
@@ -14,16 +22,7 @@ mongoUtils.connect().then(() => {
                 firstName: 'Toto 01',
                 lastName: 'Tata 01'
             },
-            metrics: [
-                { name: 'metric01', value: 54, date: new Date() },
-                { name: 'metric01', value: 21, date: new Date() },
-                { name: 'metric01', value: 14, date: new Date() },
-                { name: 'metric01', value: 96, date: new Date() },
-                { name: 'metric02', value: 47, date: new Date() },
-                { name: 'metric02', value: 60, date: new Date() },
-                { name: 'metric02', value: 50, date: new Date() },
-                { name: 'metric02', value: 75, date: new Date() }
-            ]
+            metrics: []
         },
         {
             user: {
@@ -32,18 +31,24 @@ mongoUtils.connect().then(() => {
                 firstName: 'Toto 02',
                 lastName: 'Tata 02'
             },
-            metrics: [
-                { name: 'metric01', value: 14, date: new Date() },
-                { name: 'metric01', value: 62, date: new Date() },
-                { name: 'metric01', value: 83, date: new Date() },
-                { name: 'metric01', value: 49, date: new Date() },
-                { name: 'metric02', value: 10, date: new Date() },
-                { name: 'metric02', value: 20, date: new Date() },
-                { name: 'metric02', value: 15, date: new Date() },
-                { name: 'metric02', value: 36, date: new Date() }
-            ]
+            metrics: []
         }
     ];
+
+    profiles.forEach((profile, index) => {
+        const names = ['metric1', 'metric2', 'metric3'];
+        const metrics: any[] = [];
+        names.forEach((name) => {
+            for (let i=0 ; i<100 ; i++) {
+                metrics.push({
+                    name: name,
+                    value: randomNumber(0, 50),
+                    date: randomDate(new Date(2010, 1, 1), new Date())
+                });
+            }
+        });
+        profiles[index].metrics = metrics;
+    });
 
     const finished = _.after(profiles.length, () => {
         mongoUtils.close();
@@ -70,3 +75,5 @@ mongoUtils.connect().then(() => {
 }).catch((err) => {
     throw err;
 });
+
+export = {};
