@@ -1,8 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../api/controllers/auth');
-const Response = require('../api/models/response');
-const userService = require('../services/user');
 const path = require('path');
 
 router.get('/login', (req, res) => {
