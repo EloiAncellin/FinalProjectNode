@@ -17,6 +17,17 @@ export = {
             res.status(400).json(new Response(Response.ERROR, err));
         });
     },
+    getById: function(req, res) {
+        Metric.findById(req.params.id).select(['-userId', '-__v']).then((metric) => {
+            if (!metric) {
+                return res.status(401).json(new Response(Response.ERROR, 'Metric not found.'));
+            } else {
+                res.status(200).json(new Response(Response.SUCCESS, metric));
+            }
+        }).catch((err) => {
+            res.status(400).json(new Response(Response.ERROR, err));
+        });
+    },
     getByName: function(req, res) {
         Metric.find({
             userId: req.body.user._id,

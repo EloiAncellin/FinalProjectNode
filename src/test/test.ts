@@ -163,7 +163,7 @@ describe('Tests', () => {
 
             it('retrieve metric values', (done) => {
                 request(_app)
-                    .get(`/api/metrics/${metricNames[0]}`)
+                    .get(`/api/metrics/collection/${metricNames[0]}`)
                     .set({ authorization: token })
                     .expect(200)
                     .then(response => {
@@ -187,6 +187,25 @@ describe('Tests', () => {
                         done();
                     }).catch(done);
             });
+
+            // it('delete metric', (done) => {
+            //     request(_app)
+            //         .delete(`/api/metrics/${metricsObjects[0]._id}`)
+            //         .set({ authorization: token })
+            //         .expect(200)
+            //         .then(response => {
+            //             expect(response.body.status).to.equal(Response.SUCCESS);
+            //             request(_app)
+            //                 .get(`/api/metrics/${metricsObjects[0]._id}`)
+            //                 .set({ authorization: token })
+            //                 .expect(200)
+            //                 .then(response => {
+            //                     expect(response.body.status).to.equal(Response.SUCCESS);
+            //
+            //                     done();
+            //                 }).catch(done);
+            //         }).catch(done);
+            // });
         })
     });
 });
