@@ -7,7 +7,7 @@ export = {
     ensureAuthenticated: function(req, res, next) {
         const token = req.headers.authorization;
         if (!token) {
-            return res.status(401).json(new Response(Response.ERROR, 'Token is missing.'));
+            return res.status(422).json(new Response(Response.ERROR, 'Token is missing.'));
         }
 
         const verifyOptions = {
