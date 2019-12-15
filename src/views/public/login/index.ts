@@ -1,7 +1,7 @@
 const checkLoggedIn = () => {
     const token: string = localStorage.getItem('jwt') || '';
     if (token !== '') {
-        window.location.replace('/home');
+        window.location.replace('/');
     }
 };
 
@@ -23,7 +23,7 @@ const onLoginClicked = async () => {
     const res = JSON.parse(await response.text());
     if (res.status === 'success') {
         localStorage.setItem('jwt', res.result.token);
-        window.location.replace('/home');
+        window.location.replace('/');
     } else {
         alert(res.result);
     }
