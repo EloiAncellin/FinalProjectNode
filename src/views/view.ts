@@ -14,8 +14,8 @@ router.get('/logout', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/logout/index.html'));
 });
 
-router.get('/hello', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/hello/index.html'));
+router.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/home/index.html'));
 });
 
 export = router;
