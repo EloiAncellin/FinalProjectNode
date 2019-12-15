@@ -23,8 +23,6 @@ const getUserData = async () => {
         user = res.result;
         (document.getElementById('greeting') as HTMLInputElement).innerHTML = `Hello ${user.firstName}`;
         getMetrics();
-    } else {
-        alert(res.result);
     }
 };
 
