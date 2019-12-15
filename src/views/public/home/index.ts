@@ -1,3 +1,5 @@
+let user;
+
 const getUserData = async () => {
     const token: string = localStorage.getItem('jwt') || '';
     if (token === ''){
@@ -15,10 +17,16 @@ const getUserData = async () => {
 
     const res = JSON.parse(await response.text());
     if (res.status === 'success') {
-        (document.getElementById('email') as HTMLInputElement).innerHTML = res.result.email;
-        (document.getElementById('firstName') as HTMLInputElement).innerHTML = res.result.firstName;
-        (document.getElementById('lastName') as HTMLInputElement).innerHTML = res.result.lastName;
+        user = res.result;
+        (document.getElementById('greeting') as HTMLInputElement).innerHTML = `Hello ${user.firstName}`;
     } else {
         alert(res.result);
     }
 };
+
+const onDisconnectClicked = () => {
+    localStorage.setItem('jwt', '');
+    window.location.replace('/login');
+}
+
+export = {};

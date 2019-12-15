@@ -1,0 +1,28 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    background: #1abc9c;
+    color: white;
+    font-size: 25px;
+}
+
+.disconnect-link {
+    margin-left: 20px;
+    background-color: #017780;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.disconnect-link:hover {
+    background-color: #015359;
+    color: white;
+}

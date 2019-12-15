@@ -10,10 +10,6 @@ router.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/login/index.html'));
 });
 
-router.get('/logout', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/logout/index.html'));
-});
-
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/home/index.html'));
 });
