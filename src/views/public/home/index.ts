@@ -51,8 +51,6 @@ const getMetrics = async () => {
             ul.appendChild(a);
         });
         (document.getElementById('metrics') as HTMLInputElement).appendChild(ul);
-    } else {
-        alert(res.result);
     }
 };
 
