@@ -34,4 +34,27 @@ docker exec -it web npm run populate
 docker exec -it web npm run clear
 ```
 
+# API
+
+The server is running an API which has the following routes :
+
+### User related requests
+
+|Method|Route|Parameters|Description|Return
+|-|
+|POST|/users/register|email, password, firstName, lastName|Create a new user
+|POST|/users/authenticate|email, password|Authenticate a user and returns an access **token**
+|GET|/users/me|Authorization Token|Get personal details of a user
+
+### Metrics related requests
+
+|Method|Route|Parameters|Description
+|-|
+|GET|/metrics|Authorization Token|Returns all metric names of that user
+|GET|/metrics/:id|Authorization Token|Retrieve a metric by its id
+|GET|/metrics/collection/:name|Authorization Token|Retrieve all metrics in a specific metric collection
+|POST|/metrics|Authorization Token, name, value|Create a metric
+|PUT|/metrics/:id|Authorization Token, name, value|Update a metric
+|DELETE|/metrics/:id|Authorization Token|Delete a metric
+
 # [Contributors](https://github.com/EloiAncellin/FinalProjectNode/blob/master/CONTRIBUTORS.md)
