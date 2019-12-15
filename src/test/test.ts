@@ -132,6 +132,7 @@ describe('Tests', () => {
                 { name: metricNames[2], value: 88 }
             ];
             const metrics = metrics0.concat(metrics1, metrics2);
+            let metricsObjects;
 
             it('create metrics', (done) => {
                 request(_app)
@@ -141,6 +142,7 @@ describe('Tests', () => {
                     .expect(200)
                     .then(response => {
                         expect(response.body.status).to.equal(Response.SUCCESS);
+                        metricsObjects = response.body.result;
                         const cleaned = response.body.result.map((metric) => (({_id, userId, date, __v, ...x}) => x)(metric));
                         expect(cleaned).to.deep.equalInAnyOrder(metrics);
                         done();
@@ -171,6 +173,20 @@ describe('Tests', () => {
                         done();
                     }).catch(done);
             })
+
+            it('update metric', (done) => {
+                request(_app)
+                    .put(`/api/metrics/${metricsObjects[0]._id}`)
+                    .set({ authorization: token })
+                    .send({ name: metricsObjects[0].name, value: 0})
+                    .expect(200)
+                    .then(response => {
+                        expect(response.body.status).to.equal(Response.SUCCESS);
+                        expect(response.body.result.value).to.equal(0);
+                        metricsObjects[0].value = 0;
+                        done();
+                    }).catch(done);
+            });
         })
     });
 });
