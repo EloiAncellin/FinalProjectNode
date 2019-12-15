@@ -16,15 +16,16 @@
         "mongodb": "^3.3.5",
         "mongoose": "^5.8.1",
         "node-rsa": "^1.0.7",
+        "path": "^0.12.7",
         "typescript": "^3.7.3"
     },
     "scripts": {
         "build": "node_modules/typescript/bin/tsc && npm run generate-keys",
-        "generate-keys": "node src/dist/keys/generate.js",
-        "populate": "npm run build && node src/dist/utils/populate",
-        "start": "npm run build && node src/dist/app.js",
+        "generate-keys": "node src/keys/generate.js",
+        "populate": "npm run build && node src/utils/populate.js",
+        "start": "npm run build && node src/app.js",
         "dev": "nodemon -e ts --exec \"npm run start || exit 1\"",
-        "test": "npm run build && mocha src/dist/test",
+        "test": "npm run build && mocha src/test",
         "coverage": "nyc npm run test",
         "test-travis": "nyc --reporter=lcov npm run test",
         "coveralls": "cat coverage/lcov.info | coveralls"
