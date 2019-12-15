@@ -1,4 +1,15 @@
-const onLogin = async () => {
+const checkLoggedIn = () => {
+    const token: string = localStorage.getItem('jwt') || '';
+    if (token !== '') {
+        window.location.replace('/hello');
+    }
+};
+
+const onRegisterClicked = async () => {
+    window.location.replace('/register');
+};
+
+const onLoginClicked = async () => {
     const email: string = (document.getElementById('email') as HTMLInputElement).value;
     const password: string = (document.getElementById('password') as HTMLInputElement).value;
 
@@ -17,3 +28,5 @@ const onLogin = async () => {
         alert(res.result);
     }
 };
+
+export = {};

@@ -2,14 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Metrics - Login</title>
+    <title>Login</title>
     <script type="text/javascript" src="/static/login/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/login/style.css" />
 </head>
 <body>
-    <div>
-        <input id="email" type="text" placeholder="email"></input></br>
-        <input id="password" type="password" placeholder="password"></input></br>
-        <button onclick="onLogin()">Login</button>
+    <div class='root-container'>
+        <div class='login-form'>
+            <h2>SIGN IN</h2>
+            <input
+                id='email'
+                class='login-input'
+                type='text'
+                placeholder='Email'
+            />
+            <input
+                id='password'
+                class='login-input'
+                type='password'
+                placeholder='Password'
+            />
+            <div class='login-buttons'>
+                <button class='login-button-register' onClick='onRegisterClicked()'>Register</button>
+                <button class='login-button-login' onClick='onLoginClicked()'>Login</button>
+            </div>
+        </div>
     </div>
+
+    <script>
+        window.onload = () => {
+            checkLoggedIn();
+        };
+    </script>
 </body>
 </html>

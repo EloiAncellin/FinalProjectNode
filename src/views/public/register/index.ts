@@ -32,3 +32,5 @@ const onRegisterClicked = async () => {
         }
     }
 };
+
+export = {};
