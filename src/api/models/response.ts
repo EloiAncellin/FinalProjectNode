@@ -3,12 +3,10 @@ export = class Response<T> {
     static ERROR: string = 'error';
 
     status: string;
-    code: number;
     result: T;
 
-    constructor(status: string, code: number, result: T) {
+    constructor(status: string, result: T) {
         this.status = status;
-        this.code = code;
         this.result = result;
     }
 }
