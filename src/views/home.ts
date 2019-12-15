@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../api/controllers/auth');
-// const Response = require('../api/models/response');
+const Response = require('../api/models/response');
 const userService = require('../services/user');
 
 router.get('/', (req, res) => {
@@ -18,7 +18,7 @@ router.get('/auth', (req, res) => {
         password: 'toto01'
     };
     userService.authenticate(cred, (response) => {
-        if (response.code === 200) {
+        if (response.status === Response.SUCCESS) {
             res.cookie('jwt', response.result.token, {
                 httpOnly: true,
                 secure: false // no ssl for now...
@@ -28,4 +28,4 @@ router.get('/auth', (req, res) => {
     });
 });
 
-module.exports = router;
+export = router;

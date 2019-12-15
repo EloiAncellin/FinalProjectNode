@@ -34,4 +34,4 @@ export = {
             callback(new Response(Response.ERROR, 401, err));
         });
     }
-}
+};

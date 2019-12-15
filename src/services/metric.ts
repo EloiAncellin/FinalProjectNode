@@ -76,4 +76,4 @@ export = {
             callback(new Response(Response.ERROR, 500, err));
         });
     }
-}
+};
