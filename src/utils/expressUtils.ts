@@ -24,6 +24,10 @@ export = {
     start: (isTest) => {
         colors.enable();
         return new Promise((resolve, reject) => {
+            app.engine('html', require('ejs').renderFile);
+            app.set('view engine', 'html');
+            app.set('views', path.join(__dirname, '../views/public'));
+
             app.use(bodyParser.urlencoded({ extended: false }));
             app.use(bodyParser.json());
 
