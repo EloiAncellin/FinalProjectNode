@@ -1,33 +1,21 @@
-const jwt = require('jsonwebtoken');
-const keys = require('../../keys/generate');
-const User = require('../models/user');
 const Response = require('../models/response');
+const authService = require('../../services/auth');
 
 export = {
     ensureAuthenticated: (req, res, next) => {
         const token = req.headers.authorization;
         if (!token) {
-            return res.status(422).json(new Response(Response.ERROR, 'Token is missing.'));
+            const response = new Response(Response.ERROR, 422, 'Token is missing.');
+            res.status(response.code).json(response);
+        } else {
+            authService.ensureAuthenticated(token, (response) => {
+                if (response.status === Response.SUCCESS) {
+                    req.body.user = response.result;
+                    next();
+                } else {
+                    res.status(response.code).json(response);
+                }
+            });
         }
-
-        const verifyOptions = {
-            expiresIn: process.env.JWT_VALIDITY,
-            algorithm: [process.env.JWT_ALGORITHM]
-        }
-
-        jwt.verify(token, keys.publicKey, verifyOptions, function(err, payload) {
-            if (err) {
-                res.status(401).json(new Response(Response.ERROR, err));
-            } else {
-                User.findById(payload.userId, function(err, user) {
-                    if (!user) {
-                        return res.status(401).json(new Response(Response.ERROR, 'User not found.'));
-                    } else {
-                        req.body.user = user;
-                        next();
-                    }
-                });
-            }
-        });
     }
 };
