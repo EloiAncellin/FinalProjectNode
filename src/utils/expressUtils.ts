@@ -2,6 +2,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const express = require('express');
 const colors = require('colors/safe');
+const path = require('path');
 const app = express();
 
 let _server;
@@ -28,7 +29,8 @@ export = {
             app.use(bodyParser.urlencoded({ extended: false }));
             app.use(bodyParser.json());
 
-            app.use('/', require('../views/home'));
+            app.use('/static', express.static(path.join(__dirname, '../views/public')));
+            app.use('/', require('../views/view'));
             app.use('/api', require('../api/api'));
 
             const port = process.env.WEB_PORT;
