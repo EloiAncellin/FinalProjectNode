@@ -2,5 +2,6 @@ node_modules
 .nyc_output
 coverage
 /**/*.js
+!src/views/public/metric/index.js
 src/keys/public.key
 src/keys/private.key
