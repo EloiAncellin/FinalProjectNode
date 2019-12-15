@@ -26,24 +26,22 @@ const getMetrics = async (metricName) => {
 };
 
 const displayMetrics = (metricName, metrics) => {
-    const data = metrics.map((metric) => {
-        return {
-            x: metric.date,
-            y: metric.value
-        };
-    });
-
-    const serie = {
-        label: metricName,
-        borderColor: 'blue',
-        data: data
-    };
-
     const ctx = document.getElementById('myChart');
     const lines = new Chart(ctx, {
         type: 'line',
         data: {
-            datasets: [serie]
+            datasets: [
+                {
+                    label: metricName,
+                    borderColor: 'blue',
+                    data: metrics.map((metric) => {
+                        return {
+                            x: metric.date,
+                            y: metric.value
+                        };
+                    })
+                }
+            ]
         },
         options: {
             maintainAspectRatio: false,
