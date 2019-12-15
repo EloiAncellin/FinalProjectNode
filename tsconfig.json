@@ -6,7 +6,6 @@
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "noImplicitAny": false,
-        "outDir": "./src/dist",
         "moduleResolution": "node"
     },
     "include": [
