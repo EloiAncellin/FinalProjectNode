@@ -6,36 +6,32 @@ import UserInterface from './interfaces/user';
 import CredentialInterface from './interfaces/credential';
 
 export = {
-    create: (user: UserInterface) => {
-        return new Promise((resolve, reject) => {
-            User.create(user).then((response) => {
-                const userWithoutHash = (({password, __v, ...x}) => x)(response._doc);
-                resolve(new Response(Response.SUCCESS, 201, userWithoutHash));
-            }).catch((err) => {
-                reject(new Response(Response.ERROR, 500, err));
-            });
+    create: (user: UserInterface, callback: (response: Response) => void): void => {
+        User.create(user).then((response) => {
+            const userWithoutHash = (({password, __v, ...x}) => x)(response._doc);
+            callback(new Response(Response.SUCCESS, 201, userWithoutHash));
+        }).catch((err) => {
+            callback(new Response(Response.ERROR, 500, err));
         });
     },
-    authenticate: (cred: CredentialInterface) => {
-        return new Promise((resolve, reject) => {
-            User.findOne({ email: cred.email }).then((user) => {
-                if (!user) {
-                    reject(new Response(Response.ERROR, 200, 'Could not find user.'));
-                } else {
-                    user.comparePassword(cred.password).then(() => {
-                        const signOptions = {
-                            expiresIn: process.env.JWT_VALIDITY,
-                            algorithm: process.env.JWT_ALGORITHM
-                        }
-                        const token = jwt.sign({ userId: user._id }, keys.privateKey, signOptions);
-                        resolve(new Response(Response.SUCCESS, 200, { token: token }));
-                    }).catch((err) => {
-                        reject(new Response(Response.ERROR, 401, 'Wrong password.'));
-                    });
-                }
-            }).catch((err) => {
-                reject(new Response(Response.ERROR, 401, err));
-            });
+    authenticate: (cred: CredentialInterface, callback: (response: Response) => void): void => {
+        User.findOne({ email: cred.email }).then((user) => {
+            if (!user) {
+                callback(new Response(Response.ERROR, 200, 'Could not find user.'));
+            } else {
+                user.comparePassword(cred.password).then(() => {
+                    const signOptions = {
+                        expiresIn: process.env.JWT_VALIDITY,
+                        algorithm: process.env.JWT_ALGORITHM
+                    }
+                    const token = jwt.sign({ userId: user._id }, keys.privateKey, signOptions);
+                    callback(new Response(Response.SUCCESS, 200, { token: token }));
+                }).catch((err) => {
+                    callback(new Response(Response.ERROR, 401, 'Wrong password.'));
+                });
+            }
+        }).catch((err) => {
+            callback(new Response(Response.ERROR, 401, err));
         });
     }
 }

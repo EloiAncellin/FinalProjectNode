@@ -8,20 +8,16 @@ export = {
             password: req.body.password,
             firstName: req.body.firstName,
             lastName: req.body.lastName
-        }).then((response) => {
+        }, (response) => {
             res.status(response.code).json(response);
-        }).catch((err) => {
-            res.status(err.code).json(err);
-        })
+        });
     },
     authenticate: (req, res) => {
         userService.authenticate({
             email: req.body.email,
             password: req.body.password
-        }).then((response) => {
+        }, (response) => {
             res.status(response.code).json(response);
-        }).catch((err) => {
-            res.status(err.code).json(err);
         });
     },
     getPersonalDetails: (req, res) => {
