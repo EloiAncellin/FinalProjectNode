@@ -4,7 +4,7 @@ const User = require('../models/user');
 const Response = require('../models/response');
 
 export = {
-    ensureAuthenticated: function(req, res, next) {
+    ensureAuthenticated: (req, res, next) => {
         const token = req.headers.authorization;
         if (!token) {
             return res.status(422).json(new Response(Response.ERROR, 'Token is missing.'));
@@ -30,4 +30,4 @@ export = {
             }
         });
     }
-}
+};

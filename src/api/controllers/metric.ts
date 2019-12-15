@@ -1,82 +1,55 @@
 const Response = require('../models/response');
-const Metric = require('../models/metric');
+const metricService = require('../../services/metric');
 
 export = {
-    create: function(req, res) {
+    create: (req, res) => {
         if (req.body.metrics && Array.isArray(req.body.metrics)) {
-            const metrics = req.body.metrics.map((metric) => {
+            metricService.create(req.body.metrics.map((metric) => {
                 return {
                     userId: req.body.user._id,
                     name: metric.name,
                     value: metric.value,
                     date: new Date()
-                }
-            });
-            Metric.create(metrics).then((docs) => {
-                res.status(201).json(new Response(Response.SUCCESS, docs));
-            }).catch((err) => {
-                res.status(500).json(new Response(Response.ERROR, err));
+                };
+            }), (response) => {
+                res.status(response.code).json(response);
             });
         } else {
-            res.status(422).json(new Response(Response.ERROR, 'Missing parameter `metrics`.'));
+            const response = new Response(Response.ERROR, 422, 'Missing parameter `metrics`.');
+            res.status(response.code).json(response);
         }
     },
-    getById: function(req, res) {
-        Metric.findById(req.params.id).select(['-userId', '-__v']).then((metric) => {
-            if (!metric) {
-                return res.status(404).json(new Response(Response.ERROR, 'Metric not found.'));
-            } else {
-                res.status(200).json(new Response(Response.SUCCESS, metric));
-            }
-        }).catch((err) => {
-            res.status(500).json(new Response(Response.ERROR, err));
-        });
-    },
-    getByName: function(req, res) {
-        Metric.find({
-            userId: req.body.user._id,
-            name: req.params.name
-        }).select(['-userId', '-__v']).then((docs) => {
-            res.status(200).json(new Response(Response.SUCCESS, docs));
-        }).catch((err) => {
-            res.status(500).json(new Response(Response.ERROR, err));
+    getById: (req, res) => {
+        metricService.getById(req.body.user._id, req.params.id, (response) => {
+            res.status(response.code).json(response);
         })
     },
-    getNames: function(req, res) {
-        Metric.find({ userId: req.body.user._id }).distinct('name').then((names) => {
-            res.status(200).json(new Response(Response.SUCCESS, names));
-        }).catch((err) => {
-            res.status(500).json(new Response(Response.ERROR, err));
+    getByName: (req, res) => {
+        metricService.getByName(req.body.user._id, req.params.name, (response) => {
+            res.status(response.code).json(response);
         });
     },
-    updateById: function(req, res) {
-        Metric.findOne({
-            _id: req.params.id,
-            userId: req.body.user._id
-        }).then((doc) => {
-            if (!doc) {
-                res.status(404).json(new Response(Response.ERROR, `Could not find metric with id=${req.body.id}`));
-            } else {
-                doc.name = req.body.name;
-                doc.value = req.body.value;
-                doc.save().then((doc) => {
-                    res.status(200).json(new Response(Response.SUCCESS, doc));
-                }).catch((err) => {
-                    res.status(500).json(new Response(Response.ERROR, err));
-                });
-            }
-        }).catch((err) => {
-            res.status(500).json(new Response(Response.ERROR, err));
-        })
+    getNames: (req, res) => {
+        metricService.getNames(req.body.user._id, (response) => {
+            res.status(response.code).json(response);
+        });
     },
-    deleteById: function(req, res) {
-        Metric.deleteOne({
-            _id: req.params.id,
-            userId: req.body.user._id
-        }).then((response) => {
-            res.status(200).json(new Response(Response.SUCCESS, response));
-        }).catch((err) => {
-            res.status(500).json(new Response(Response.ERROR, err));
+    updateById: (req, res) => {
+        if (typeof req.body.name !== 'undefined' && typeof req.body.value !== 'undefined') {
+            metricService.updateById(req.body.user._id, req.params.id, {
+                name: req.body.name,
+                value: req.body.value
+            }, (response) => {
+                res.status(response.code).json(response);
+            });
+        } else {
+            const response = new Response(Response.ERROR, 422, 'Missing parameters `name`, `value`.');
+            res.status(response.code).json(response);
+        }
+    },
+    deleteById: (req, res) => {
+        metricService.deleteById(req.body.user._id, req.params.id, (response) => {
+            res.status(response.code).json(response);
         });
     }
-}
+};

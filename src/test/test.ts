@@ -191,14 +191,19 @@ describe('Tests', () => {
                     .expect(200)
                     .then(response => {
                         expect(response.body.status).to.equal(Response.SUCCESS);
-                        request(_app)
-                            .get(`/api/metrics/${metricsObjects[0]._id}`)
-                            .set({ authorization: token })
-                            .expect(404)
-                            .then(response => {
-                                expect(response.body.status).to.equal(Response.ERROR);
-                                done();
-                            }).catch(done);
+                        expect(response.body.result.deletedCount).to.equal(1);
+                        done();
+                    }).catch(done);
+            });
+
+            it('should not find metric', (done) => {
+                request(_app)
+                    .get(`/api/metrics/${metricsObjects[0]._id}`)
+                    .set({ authorization: token })
+                    .expect(404)
+                    .then(response => {
+                        expect(response.body.status).to.equal(Response.ERROR);
+                        done();
                     }).catch(done);
             });
         })
