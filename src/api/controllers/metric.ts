@@ -13,9 +13,9 @@ export = {
                 }
             });
             Metric.create(metrics).then((docs) => {
-                res.status(200).json(new Response(Response.SUCCESS, docs));
+                res.status(201).json(new Response(Response.SUCCESS, docs));
             }).catch((err) => {
-                res.status(400).json(new Response(Response.ERROR, err));
+                res.status(500).json(new Response(Response.ERROR, err));
             });
         } else {
             res.status(422).json(new Response(Response.ERROR, 'Missing parameter `metrics`.'));
@@ -24,12 +24,12 @@ export = {
     getById: function(req, res) {
         Metric.findById(req.params.id).select(['-userId', '-__v']).then((metric) => {
             if (!metric) {
-                return res.status(401).json(new Response(Response.ERROR, 'Metric not found.'));
+                return res.status(404).json(new Response(Response.ERROR, 'Metric not found.'));
             } else {
                 res.status(200).json(new Response(Response.SUCCESS, metric));
             }
         }).catch((err) => {
-            res.status(400).json(new Response(Response.ERROR, err));
+            res.status(500).json(new Response(Response.ERROR, err));
         });
     },
     getByName: function(req, res) {
@@ -39,14 +39,14 @@ export = {
         }).select(['-userId', '-__v']).then((docs) => {
             res.status(200).json(new Response(Response.SUCCESS, docs));
         }).catch((err) => {
-            res.status(400).json(new Response(Response.ERROR, err));
+            res.status(500).json(new Response(Response.ERROR, err));
         })
     },
     getNames: function(req, res) {
         Metric.find({ userId: req.body.user._id }).distinct('name').then((names) => {
             res.status(200).json(new Response(Response.SUCCESS, names));
         }).catch((err) => {
-            res.status(400).json(new Response(Response.ERROR, err));
+            res.status(500).json(new Response(Response.ERROR, err));
         });
     },
     updateById: function(req, res) {
@@ -55,18 +55,18 @@ export = {
             userId: req.body.user._id
         }).then((doc) => {
             if (!doc) {
-                res.status(400).json(new Response(Response.ERROR, `Could not find metric with id=${req.body.id}`));
+                res.status(404).json(new Response(Response.ERROR, `Could not find metric with id=${req.body.id}`));
             } else {
                 doc.name = req.body.name;
                 doc.value = req.body.value;
                 doc.save().then((doc) => {
                     res.status(200).json(new Response(Response.SUCCESS, doc));
                 }).catch((err) => {
-                    res.status(400).json(new Response(Response.ERROR, err));
+                    res.status(500).json(new Response(Response.ERROR, err));
                 });
             }
         }).catch((err) => {
-            res.status(400).json(new Response(Response.ERROR, err));
+            res.status(500).json(new Response(Response.ERROR, err));
         })
     },
     deleteById: function(req, res) {
@@ -74,9 +74,9 @@ export = {
             _id: req.params.id,
             userId: req.body.user._id
         }).then((response) => {
-            res.status(200).json(new Response(Response.SUCCESS, response));
+            res.status(204).json(new Response(Response.SUCCESS, response));
         }).catch((err) => {
-            res.status(400).json(new Response(Response.ERROR, err));
+            res.status(500).json(new Response(Response.ERROR, err));
         });
     }
 }
