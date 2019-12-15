@@ -12,9 +12,9 @@ export = {
             lastName: req.body.lastName
         }).then((response) => {
             const userWithoutHash = (({password, __v, ...x}) => x)(response._doc);
-            res.status(200).json(new Response(Response.SUCCESS, userWithoutHash));
+            res.status(201).json(new Response(Response.SUCCESS, userWithoutHash));
         }).catch((err) => {
-            res.status(400).json(new Response(Response.ERROR, err));
+            res.status(500).json(new Response(Response.ERROR, err));
         });
     },
     authenticate: function(req, res) {
@@ -33,12 +33,12 @@ export = {
                     if (!err) {
                         res.status(400).json(new Response(Response.ERROR, 'Wrong password.'));
                     } else {
-                        res.status(400).json(new Response(Response.ERROR, 'Something went wrong'));
+                        res.status(500).json(new Response(Response.ERROR, 'Something went wrong'));
                     }
                 });
             }
         }).catch((err) => {
-            res.status(400).json(new Response(Response.ERROR, err));
+            res.status(500).json(new Response(Response.ERROR, err));
         })
     },
     getPersonalDetails: function(req, res) {
