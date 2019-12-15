@@ -35,17 +35,12 @@ export = {
         });
     },
     updateById: (req, res) => {
-        if (typeof req.body.name !== 'undefined' && typeof req.body.value !== 'undefined') {
-            metricService.updateById(req.body.user._id, req.params.id, {
-                name: req.body.name,
-                value: req.body.value
-            }, (response) => {
-                res.status(response.code).json(response);
-            });
-        } else {
-            const response = new Response(Response.ERROR, 422, 'Missing parameters `name`, `value`.');
+        metricService.updateById(req.body.user._id, req.params.id, {
+            name: req.body.name,
+            value: req.body.value
+        }, (response) => {
             res.status(response.code).json(response);
-        }
+        });
     },
     deleteById: (req, res) => {
         metricService.deleteById(req.body.user._id, req.params.id, (response) => {
