@@ -1,4 +1,4 @@
-require('custom-env').env(process.env.APP_ENV);
+require('dotenv').config();
 const NodeRSA = require('node-rsa');
 const fs = require('fs');
 

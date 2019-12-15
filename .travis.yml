@@ -6,7 +6,7 @@ services:
     - mongodb
 
 env:
-    - APP_ENV=travis
+    - TRAVIS=1
 
 install:
     - npm ci

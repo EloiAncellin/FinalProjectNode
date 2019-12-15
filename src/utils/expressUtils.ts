@@ -19,7 +19,7 @@ const cheezyLog = () => {
 }
 
 export = {
-    start: () => {
+    start: (isTest) => {
         return new Promise((resolve, reject) => {
             app.use(bodyParser.urlencoded({ extended: false }));
             app.use(bodyParser.json());
@@ -27,7 +27,11 @@ export = {
             app.use('/', require('../views/home'));
             app.use('/api', require('../api/api'));
 
-            _server = app.listen(process.env.WEB_PORT, () => {
+            const port = process.env.WEB_PORT;
+            const portTest = process.env.WEB_PORT_TEST;
+            const _port = isTest ? portTest : port;
+
+            _server = app.listen(_port, () => {
                 if (process.env.VERBOSE == '1') {
                     cheezyLog();
                 }

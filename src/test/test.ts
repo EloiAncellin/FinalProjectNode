@@ -1,4 +1,4 @@
-require('custom-env').env(process.env.APP_ENV);
+require('dotenv').config();
 const chai = require('chai');
 const request = require('supertest');
 const deepEqualInAnyOrder = require('deep-equal-in-any-order');
@@ -17,10 +17,7 @@ describe('Tests', () => {
         mongoUtils.connect(true).then(() => {
             mongoUtils.clear().then(() => {
                 process.env.VERBOSE = '0';
-                process.env.OLD_WEB_PORT = process.env.WEB_PORT;
-                process.env.WEB_PORT = String(Number(process.env.WEB_PORT) + 1);
-
-                expressUtils.start().then((app) => {
+                expressUtils.start(true).then((app) => {
                     _app = app;
                     done();
                 }).catch(done);
@@ -31,7 +28,6 @@ describe('Tests', () => {
     after((done) => {
         mongoUtils.close();
         process.env.VERBOSE = '1';
-        process.env.WEB_PORT = process.env.OLD_WEB_PORT;
         expressUtils.stop();
         done();
     });

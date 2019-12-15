@@ -1,4 +1,4 @@
-require('custom-env').env(process.env.APP_ENV);
+require('dotenv').config();
 const colors = require('colors/safe');
 const _ = require('underscore');
 const mongoUtils = require('./mongoUtils');
