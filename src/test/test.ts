@@ -76,7 +76,7 @@ describe('Tests', () => {
             request(_app)
                 .post('/api/users/register')
                 .send(user)
-                .expect(200)
+                .expect(201)
                 .then(response => {
                     expect(response.body.status).to.equal(Response.SUCCESS);
                     expect(response.body.result._id).to.exist;
@@ -139,7 +139,7 @@ describe('Tests', () => {
                     .post('/api/metrics')
                     .set({ authorization: token })
                     .send({ metrics: metrics })
-                    .expect(200)
+                    .expect(201)
                     .then(response => {
                         expect(response.body.status).to.equal(Response.SUCCESS);
                         metricsObjects = response.body.result;
@@ -198,7 +198,7 @@ describe('Tests', () => {
                         request(_app)
                             .get(`/api/metrics/${metricsObjects[0]._id}`)
                             .set({ authorization: token })
-                            .expect(401)
+                            .expect(404)
                             .then(response => {
                                 expect(response.body.status).to.equal(Response.ERROR);
                                 done();

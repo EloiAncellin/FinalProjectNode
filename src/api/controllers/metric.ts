@@ -74,7 +74,7 @@ export = {
             _id: req.params.id,
             userId: req.body.user._id
         }).then((response) => {
-            res.status(204).json(new Response(Response.SUCCESS, response));
+            res.status(200).json(new Response(Response.SUCCESS, response));
         }).catch((err) => {
             res.status(500).json(new Response(Response.ERROR, err));
         });
