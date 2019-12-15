@@ -1,4 +1,3 @@
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const express = require('express');
 const colors = require('colors/safe');
@@ -25,7 +24,6 @@ export = {
     start: (isTest) => {
         colors.enable();
         return new Promise((resolve, reject) => {
-            app.use(cookieParser());
             app.use(bodyParser.urlencoded({ extended: false }));
             app.use(bodyParser.json());
 
