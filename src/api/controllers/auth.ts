@@ -29,12 +29,5 @@ export = {
                 });
             }
         });
-    },
-    checkCookies: (req, res, next) => {
-        const token = req.cookies['jwt'];
-        if (token) {
-            req.headers.authorization = token;
-        }
-        next();
     }
 };
