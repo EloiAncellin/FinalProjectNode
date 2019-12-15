@@ -39,7 +39,7 @@ export = {
         Metric.find({
             userId: req.body.user._id,
             name: req.params.name
-        }).select(['-userId', '-__v']).then((docs) => {
+        }).sort('-date').select(['-userId', '-__v']).then((docs) => {
             res.status(200).json(new Response(Response.SUCCESS, docs));
         }).catch((err) => {
             res.status(500).json(new Response(Response.ERROR, err));

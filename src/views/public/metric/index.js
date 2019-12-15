@@ -46,9 +46,11 @@ const displayMetrics = (metricName, metrics) => {
             datasets: [serie]
         },
         options: {
+            maintainAspectRatio: false,
             elements: {
                 line: {
-                    tension: 0
+                    tension: 0.2,
+                    borderWidth: 1.5
                 }
             },
             scales: {
