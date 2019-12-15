@@ -57,4 +57,14 @@ The server is running an API which has the following routes :
 | PUT | /metrics/:id | Authorization Token, name, value | Update a metric |
 | DELETE | /metrics/:id | Authorization Token | Delete a metric |
 
+### Authorization Token
+
+The authorization token must be in the request's **header** :
+
+```
+{
+    'authorization': token
+}
+```
+
 # [Contributors](https://github.com/EloiAncellin/FinalProjectNode/blob/master/CONTRIBUTORS.md)
