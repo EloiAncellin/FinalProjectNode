@@ -51,6 +51,10 @@ mongoUtils.connect().then(() => {
     });
 
     const finished = _.after(profiles.length, () => {
+        profiles.forEach((profile) => {
+            const text = `email[${profile.user.email}], password[${profile.user.password}]`;
+            console.log(colors.bold.brightMagenta(text));
+        });
         mongoUtils.close();
     });
 
