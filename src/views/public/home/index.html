@@ -12,8 +12,11 @@
         <button class='disconnect-link' onClick='onDisconnectClicked()'>Disconnect</button>
     </div>
 
+    <div id='metrics'></div>
+
     <script>
         window.onload = () => {
+            onLoaded();
             getUserData();
         };
     </script>
