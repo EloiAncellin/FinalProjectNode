@@ -188,24 +188,23 @@ describe('Tests', () => {
                     }).catch(done);
             });
 
-            // it('delete metric', (done) => {
-            //     request(_app)
-            //         .delete(`/api/metrics/${metricsObjects[0]._id}`)
-            //         .set({ authorization: token })
-            //         .expect(200)
-            //         .then(response => {
-            //             expect(response.body.status).to.equal(Response.SUCCESS);
-            //             request(_app)
-            //                 .get(`/api/metrics/${metricsObjects[0]._id}`)
-            //                 .set({ authorization: token })
-            //                 .expect(200)
-            //                 .then(response => {
-            //                     expect(response.body.status).to.equal(Response.SUCCESS);
-            //
-            //                     done();
-            //                 }).catch(done);
-            //         }).catch(done);
-            // });
+            it('delete metric', (done) => {
+                request(_app)
+                    .delete(`/api/metrics/${metricsObjects[0]._id}`)
+                    .set({ authorization: token })
+                    .expect(200)
+                    .then(response => {
+                        expect(response.body.status).to.equal(Response.SUCCESS);
+                        request(_app)
+                            .get(`/api/metrics/${metricsObjects[0]._id}`)
+                            .set({ authorization: token })
+                            .expect(401)
+                            .then(response => {
+                                expect(response.body.status).to.equal(Response.ERROR);
+                                done();
+                            }).catch(done);
+                    }).catch(done);
+            });
         })
     });
 });
