@@ -2,10 +2,10 @@ require('dotenv').config();
 const chai = require('chai');
 const request = require('supertest');
 const deepEqualInAnyOrder = require('deep-equal-in-any-order');
-const mongoUtils = require('../utils/mongoUtils');
-const expressUtils = require('../utils/expressUtils');
-const User = require('../api/models/user');
-const Response = require('../api/models/response');
+const mongoUtils = require('../dist/utils/mongoUtils');
+const expressUtils = require('../dist/utils/expressUtils');
+const User = require('../dist/api/models/user');
+const Response = require('../dist/api/models/response');
 
 const { expect } = chai;
 

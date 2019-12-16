@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "strict": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitAny": false,
+        "moduleResolution": "node",
+        "outDir": "../dist-test"
+    },
+    "include": [
+        "./**/*"
+    ],
+    "compileOnSave": true
+}
