@@ -15,7 +15,7 @@ export = {
             Metric.create(metrics).then((docs) => {
                 res.status(201).json(new Response(Response.SUCCESS, docs));
             }).catch((err) => {
-                res.status(500).json(new Response(Response.ERROR, err));
+                res.status(500).json(new Response(Response.ERROR, err.message));
             });
         } else {
             res.status(422).json(new Response(Response.ERROR, 'Missing parameter `metrics`.'));
@@ -32,7 +32,7 @@ export = {
                 res.status(200).json(new Response(Response.SUCCESS, metric));
             }
         }).catch((err) => {
-            res.status(500).json(new Response(Response.ERROR, err));
+            res.status(500).json(new Response(Response.ERROR, err.message));
         });
     },
     getByName: (req, res) => {
@@ -42,14 +42,14 @@ export = {
         }).sort('-date').select(['-userId', '-__v']).then((docs) => {
             res.status(200).json(new Response(Response.SUCCESS, docs));
         }).catch((err) => {
-            res.status(500).json(new Response(Response.ERROR, err));
+            res.status(500).json(new Response(Response.ERROR, err.message));
         });
     },
     getNames: (req, res) => {
         Metric.find({ userId: req.body.user._id }).distinct('name').then((names) => {
             res.status(200).json(new Response(Response.SUCCESS, names));
         }).catch((err) => {
-            res.status(500).json(new Response(Response.ERROR, err));
+            res.status(500).json(new Response(Response.ERROR, err.message));
         });
     },
     updateById: (req, res) => {
@@ -65,11 +65,11 @@ export = {
                 doc.save().then((doc) => {
                     res.status(200).json(new Response(Response.SUCCESS, doc));
                 }).catch((err) => {
-                    res.status(500).json(new Response(Response.ERROR, err));
+                    res.status(500).json(new Response(Response.ERROR, err.message));
                 });
             }
         }).catch((err) => {
-            res.status(500).json(new Response(Response.ERROR, err));
+            res.status(500).json(new Response(Response.ERROR, err.message));
         });
     },
     deleteById: (req, res) => {
@@ -83,7 +83,7 @@ export = {
                 res.status(404).json(new Response(Response.ERROR, 'Metric not found.'));
             }
         }).catch((err) => {
-            res.status(500).json(new Response(Response.ERROR, err));
+            res.status(500).json(new Response(Response.ERROR, err.message));
         });
     }
 };

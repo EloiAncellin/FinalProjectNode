@@ -14,7 +14,7 @@ export = {
             const userWithoutHash = (({password, __v, ...x}) => x)(response._doc);
             res.status(201).json(new Response(Response.SUCCESS, userWithoutHash));
         }).catch((err) => {
-            res.status(500).json(new Response(Response.ERROR, err));
+            res.status(500).json(new Response(Response.ERROR, err.message));
         });
     },
     authenticate: (req, res) => {
@@ -34,7 +34,7 @@ export = {
                 });
             }
         }).catch((err) => {
-            res.status(401).json(new Response(Response.ERROR, err));
+            res.status(500).json(new Response(Response.ERROR, err.message));
         });
     },
     getPersonalDetails: (req, res) => {
