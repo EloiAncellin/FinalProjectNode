@@ -7,13 +7,10 @@
         "forceConsistentCasingInFileNames": true,
         "noImplicitAny": false,
         "moduleResolution": "node",
-        "outDir": "dist"
+        "outDir": "../dist"
     },
     "include": [
-        "src/**/*"
+        "./**/*"
     ],
-    "compileOnSave": true,
-    "exclude": [
-        "node_modules",
-    ]
+    "compileOnSave": true
 }
