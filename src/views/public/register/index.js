@@ -10,7 +10,7 @@ const onRegisterClicked = async () => {
     const passwordConfirm = document.getElementById('password-confirm').value;
 
     if (password !== passwordConfirm) {
-        alert('Passwords do not match !');
+        toastr.error('Passwords are different');
     } else {
         const request = new Request('/api/users/register');
         const response = await fetch(request, {
