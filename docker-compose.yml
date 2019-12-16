@@ -9,6 +9,7 @@ services:
             - "mongodb:${DB_HOST}"
         volumes:
             - "./src:/code/src"
+            - "./test:/code/test"
             - "./.env:/code/.env"
         container_name: web
         environment:

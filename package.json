@@ -19,13 +19,14 @@
         "typescript": "^3.7.3"
     },
     "scripts": {
-        "build": "node_modules/typescript/bin/tsc && npm run copy-assets && npm run generate-keys",
+        "build": "node_modules/typescript/bin/tsc --p src/tsconfig.json && npm run copy-assets && npm run generate-keys",
+        "build-test": "node_modules/typescript/bin/tsc --p test/tsconfig.json && npm run copy-assets && npm run generate-keys",
         "generate-keys": "node dist/keys/generate.js",
         "populate": "npm run build && node dist/utils/populate.js",
         "clear": "npm run build && node dist/utils/clear.js",
         "start": "npm run build && node dist/app.js",
         "dev": "nodemon -e ts --exec \"npm run start || exit 1\"",
-        "test": "npm run build && mocha dist/test",
+        "test": "npm run build && npm run build-test && mocha dist-test",
         "coverage": "nyc npm run test",
         "test-travis": "nyc --reporter=lcov npm run test",
         "coveralls": "cat coverage/lcov.info | coveralls",
