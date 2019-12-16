@@ -3,11 +3,11 @@ const onLoginClicked = () => {
 };
 
 const onRegisterClicked = async () => {
-    const firstName: string = (document.getElementById('firstName') as HTMLInputElement).value;
-    const lastName: string = (document.getElementById('lastName') as HTMLInputElement).value;
-    const email: string = (document.getElementById('email') as HTMLInputElement).value;
-    const password: string = (document.getElementById('password') as HTMLInputElement).value;
-    const passwordConfirm: string = (document.getElementById('password-confirm') as HTMLInputElement).value;
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('password-confirm').value;
 
     if (password !== passwordConfirm) {
         alert('Passwords do not match !');
@@ -32,5 +32,3 @@ const onRegisterClicked = async () => {
         }
     }
 };
-
-export = {};

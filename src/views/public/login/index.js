@@ -1,5 +1,5 @@
 const checkLoggedIn = () => {
-    const token: string = localStorage.getItem('jwt') || '';
+    const token = localStorage.getItem('jwt') || '';
     if (token !== '') {
         window.location.replace('/');
     }
@@ -10,8 +10,8 @@ const onRegisterClicked = async () => {
 };
 
 const onLoginClicked = async () => {
-    const email: string = (document.getElementById('email') as HTMLInputElement).value;
-    const password: string = (document.getElementById('password') as HTMLInputElement).value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
     const request = new Request('/api/users/authenticate');
     const response = await fetch(request, {
@@ -28,5 +28,3 @@ const onLoginClicked = async () => {
         alert(res.result);
     }
 };
-
-export = {};

@@ -1,5 +1,5 @@
 let user;
-let token: string;
+let token;
 
 const onLoaded = () => {
     token = localStorage.getItem('jwt') || '';
@@ -21,7 +21,7 @@ const getUserData = async () => {
     const res = JSON.parse(await response.text());
     if (res.status === 'success') {
         user = res.result;
-        (document.getElementById('greeting') as HTMLInputElement).innerHTML = `Hello ${user.firstName}`;
+        document.getElementById('greeting').innerHTML = `Hello ${user.firstName}`;
         getMetrics();
     }
 };
@@ -48,7 +48,7 @@ const getMetrics = async () => {
             a.appendChild(li)
             ul.appendChild(a);
         });
-        (document.getElementById('metrics') as HTMLInputElement).appendChild(ul);
+        document.getElementById('metrics').appendChild(ul);
     }
 };
 
@@ -56,5 +56,3 @@ const onDisconnectClicked = () => {
     localStorage.setItem('jwt', '');
     window.location.replace('/login');
 };
-
-export = {};

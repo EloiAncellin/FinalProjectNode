@@ -19,16 +19,17 @@
         "typescript": "^3.7.3"
     },
     "scripts": {
-        "build": "node_modules/typescript/bin/tsc && npm run generate-keys",
-        "generate-keys": "node src/keys/generate.js",
-        "populate": "npm run build && node src/utils/populate.js",
-        "clear": "npm run build && node src/utils/clear.js",
-        "start": "npm run build && node src/app.js",
+        "build": "node_modules/typescript/bin/tsc && npm run copy-assets && npm run generate-keys",
+        "generate-keys": "node dist/keys/generate.js",
+        "populate": "npm run build && node dist/utils/populate.js",
+        "clear": "npm run build && node dist/utils/clear.js",
+        "start": "npm run build && node dist/app.js",
         "dev": "nodemon -e ts --exec \"npm run start || exit 1\"",
-        "test": "npm run build && mocha src/test",
+        "test": "npm run build && mocha dist/test",
         "coverage": "nyc npm run test",
         "test-travis": "nyc --reporter=lcov npm run test",
-        "coveralls": "cat coverage/lcov.info | coveralls"
+        "coveralls": "cat coverage/lcov.info | coveralls",
+        "copy-assets": "cp -rv src/views/public dist/views"
     },
     "devDependencies": {
         "chai": "^4.2.0",
