@@ -28,7 +28,7 @@ const onRegisterClicked = async () => {
         if (res.status === 'success') {
             window.location.replace('/login');
         } else {
-            alert(res.result);
+            toastr.error(res.result);
         }
     }
 };

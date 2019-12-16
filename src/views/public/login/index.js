@@ -25,6 +25,6 @@ const onLoginClicked = async () => {
         localStorage.setItem('jwt', res.result.token);
         window.location.replace('/');
     } else {
-        alert(res.result);
+        toastr.error(res.result);
     }
 };
