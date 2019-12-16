@@ -1,6 +1,6 @@
 require('dotenv').config();
 const colors = require('colors/safe');
-const mongoUtils = require('./mongoUtils');
+const mongoUtils = require('../dist/utils/mongoUtils');
 
 mongoUtils.connect().then(() => {
     mongoUtils.clear();

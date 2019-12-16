@@ -1,9 +1,9 @@
 require('dotenv').config();
 const colors = require('colors/safe');
 const _ = require('underscore');
-const mongoUtils = require('./mongoUtils');
-const User = require('../api/models/user');
-const Metric = require('../api/models/metric');
+const mongoUtils = require('../dist/utils/mongoUtils');
+const User = require('../dist/api/models/user');
+const Metric = require('../dist/api/models/metric');
 
 const randomDate = (start: Date, end: Date) => {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
