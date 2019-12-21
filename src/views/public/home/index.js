@@ -60,3 +60,7 @@ const onDisconnectClicked = () => {
 const onHomeClicked = () => {
     window.location.replace('/');
 }
+
+const onAddMetricClicked = () => {
+    window.location.replace('/addMetric');
+}

@@ -10,6 +10,10 @@ router.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/login/index.html'));
 });
 
+router.get('/addMetric', (req, res) => {
+	res.render(path.join(__dirname, 'public/addMetric/index.ejs'));
+});
+
 router.get('/metrics/:name', (req, res) => {
     res.render(path.join(__dirname, 'public/metric/index.ejs'), { metric: req.params.name });
 });

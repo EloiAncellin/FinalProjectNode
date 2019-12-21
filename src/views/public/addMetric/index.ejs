@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add metric</title>
+    <link rel="stylesheet" type="text/css" href="/static/home/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" crossorigin="anonymous" />
+</head>
+<body>
+    <div class='header'>
+        <button class='disconnect-link' onClick='onHomeClicked()'>Home</button>
+        <button class='disconnect-link' onClick='onDisconnectClicked()'>Disconnect</button>
+    </div>
+    
+
+    <div class="root-container">
+        <div class='register-form'>
+            <h2>REGISTER</h2>
+            <input
+            id='metric_name'
+            class='register-input'
+            type='text'
+            placeholder='Name'
+            />
+            <input
+            id='value'
+            class='register-input'
+            type='integer'
+            placeholder='metric_value'
+            />
+            <div class='register-buttons'>
+                <button class='register-button-login' onClick='onLoginClicked()'>Add</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

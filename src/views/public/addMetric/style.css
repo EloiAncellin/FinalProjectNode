@@ -1,0 +1,108 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    background: #1abc9c;
+    color: white;
+    font-size: 25px;
+}
+
+.disconnect-link {
+    background-color: #017780;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.disconnect-link:hover {
+    background-color: #015359;
+    color: white;
+}
+
+.root-container {
+    display:flex;
+    position:absolute;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.register-form {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 450px;
+    height: 360px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    padding: 0px 30px 30px 30px;
+    border-radius: 5px;
+    background: #f0f0f0;
+}
+
+.register-input-error {
+    border-radius: 5px;
+    border: 1px solid red;
+    padding: 10px;
+}
+
+.register-input {
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+}
+
+.register-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.register-button-login {
+    background-color: #00cf67;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    width: 100%;
+    margin-right: 10px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.register-button-register {
+    background-color: #017780;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    width: 100%;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.register-button-login:hover {
+    background-color: #015359;
+    color: white;
+}
+
+.register-button-register:hover {
+    background-color: #009e4e;
+    color: white;
+}
