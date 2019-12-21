@@ -56,3 +56,7 @@ const onDisconnectClicked = () => {
     localStorage.setItem('jwt', '');
     window.location.replace('/login');
 };
+
+const onHomeClicked = () => {
+    window.location.replace('/');
+}
