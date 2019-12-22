@@ -28,10 +28,10 @@
 
 .root-container {
     display:flex;
-    position:absolute;
+    position:relative;
     align-items: center;
     justify-content: center;
-    top: 0;
+    top: 7em;
     bottom: 0;
     right: 0;
     left: 0;
@@ -68,7 +68,7 @@
     justify-content: space-between;
 }
 
-.add-metric-button-login {
+.add-metric-button {
     background-color: #00cf67;
     border-radius: 5px;
     border: none;
@@ -97,7 +97,7 @@
     transition-duration: 0.4s;
 }
 
-.add-metric-button-login:hover {
+.add-metric-button:hover {
     background-color: #015359;
     color: white;
 }

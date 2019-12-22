@@ -29,11 +29,13 @@ const getMetrics = async (metricName) => {
 
 
 const onDisconnectClicked = () => {
+	console.log("eloi")
     localStorage.setItem('jwt', '');
     window.location.replace('/login');
 };
 
 const onHomeClicked = () => {
+	console.log("jean")
     window.location.replace('/');
 };
 
