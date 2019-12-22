@@ -3,11 +3,11 @@ const router = express.Router();
 const path = require('path');
 
 router.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/register/index.html'));
+    res.render(path.join(__dirname, 'public/register/index.ejs'));
 });
 
 router.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/login/index.html'));
+    res.render(path.join(__dirname, 'public/login/index.ejs'));
 });
 
 router.get('/addMetric', (req, res) => {
@@ -19,7 +19,7 @@ router.get('/metrics/:name', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/home/index.html'));
+    res.render(path.join(__dirname, 'public/home/index.ejs'));
 });
 
 
