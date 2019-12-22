@@ -5,6 +5,7 @@ const onLoaded = () => {
     if (token === ''){
         window.location.replace('/login');
     }
+    console.log(token);
 };
 
 const getMetrics = async (metricName) => {
@@ -39,6 +40,7 @@ const onHomeClicked = () => {
 
 const onAddClicked = async () => {
 	console.log(token);
+
     const metricName = document.getElementById('metric_name').value;
     const metricValue = document.getElementById('metric_value').value;
    
@@ -46,7 +48,7 @@ const onAddClicked = async () => {
     const response = await fetch(request, {
         method: 'POST',
         body: JSON.stringify({
-            Token: token,
+            token: token,
             name : metricName,
             value: metricValue,
         }),

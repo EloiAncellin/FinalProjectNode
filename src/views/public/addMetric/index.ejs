@@ -16,25 +16,29 @@
     
 
     <div class="root-container">
-        <div class='register-form'>
+        <div class='add-metric-form'>
             <h2>Insert new metric</h2>
             <input
             id='metric_name'
-            class='register-input'
+            class='add-metric-input'
             type='text'
             placeholder='Name'
             />
             <input
             id='metric_value'
-            class='register-input'
+            class='add-metric-input'
             type='number'
             placeholder='Value'
             />
-            <div class='register-buttons'>
-                <button class='register-button-login' onClick='onAddClicked()'>Add</button>
+            <div class='add-metric-buttons'>
+                <button class='add-metric-button-login' onClick='onAddClicked()'>Add</button>
             </div>
         </div>
     </div>
-
+    <script>
+        window.onload = () => {
+            onLoaded();
+        };
+    </script>
 </body>
 </html>

@@ -37,7 +37,7 @@
     left: 0;
 }
 
-.register-form {
+.add-metric-form {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -50,25 +50,25 @@
     background: #f0f0f0;
 }
 
-.register-input-error {
+.add-metric-input-error {
     border-radius: 5px;
     border: 1px solid red;
     padding: 10px;
 }
 
-.register-input {
+.add-metric-input {
     border-radius: 5px;
     border: none;
     padding: 10px;
 }
 
-.register-buttons {
+.add-metric-buttons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.register-button-login {
+.add-metric-button-login {
     background-color: #00cf67;
     border-radius: 5px;
     border: none;
@@ -83,7 +83,7 @@
     transition-duration: 0.4s;
 }
 
-.register-button-register {
+.add-metric-button-add-metric {
     background-color: #017780;
     border-radius: 5px;
     border: none;
@@ -97,12 +97,12 @@
     transition-duration: 0.4s;
 }
 
-.register-button-login:hover {
+.add-metric-button-login:hover {
     background-color: #015359;
     color: white;
 }
 
-.register-button-register:hover {
+.add-metric-button-add-metric:hover {
     background-color: #009e4e;
     color: white;
 }
