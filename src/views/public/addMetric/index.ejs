@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Add metric</title>
-    <link rel="stylesheet" type="text/css" href="/static/home/style.css" />
+    <link rel="stylesheet" type="text/css" href="/static/addMetric/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" crossorigin="anonymous" />
+        <script type="text/javascript" src="/static/addMetric/index.js"></script>
+
 </head>
 <body>
     <div class='header'>
@@ -15,7 +17,7 @@
 
     <div class="root-container">
         <div class='register-form'>
-            <h2>REGISTER</h2>
+            <h2>Insert new metric</h2>
             <input
             id='metric_name'
             class='register-input'
@@ -23,13 +25,13 @@
             placeholder='Name'
             />
             <input
-            id='value'
+            id='metric_value'
             class='register-input'
-            type='integer'
-            placeholder='metric_value'
+            type='number'
+            placeholder='Value'
             />
             <div class='register-buttons'>
-                <button class='register-button-login' onClick='onLoginClicked()'>Add</button>
+                <button class='register-button-login' onClick='onAddClicked()'>Add</button>
             </div>
         </div>
     </div>
