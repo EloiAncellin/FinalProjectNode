@@ -48,15 +48,18 @@ const onAddClicked = async () => {
     const response = await fetch(request, {
         method: 'POST',
         body: JSON.stringify({
-            token: token,
-            name : metricName,
-            value: metricValue,
+        	metrics: [{
+        		name : metricName,
+            	value: metricValue
+            	}
+     		]
         }),
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json',
+        authorization : token }
     });
     const res = JSON.parse(await response.text());
     if (res.status === 'success') {
-        window.location.replace('/home');
+        window.location.replace('/');
     } else {
         toastr.error(res.result);
     }
