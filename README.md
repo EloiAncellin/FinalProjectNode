@@ -57,8 +57,20 @@ The server is running an API which has the following routes :
 | PUT | /api/metrics/:id | Authorization Token, name, value | Update a metric |
 | DELETE | /api/metrics/:id | Authorization Token | Delete a metric |
 
-### Authorization Token
-
 The **Authorization Token** must be in the request's **header** as the `Authorization` field.
+
+### Test it
+
+Register :
+
+```
+curl -X POST -H "Content-Type: application/json" -d '{"email": "toto101@abc.fr", "password": "toto101", "firstName": "Toto", "lastName": "Tata"}' http://localhost:8080/api/users/register
+```
+
+Authenticate :
+
+```
+curl -X POST -H "Content-Type: application/json" -d '{"email": "toto101@abc.fr", "password": "toto101"}' http://localhost:8080/api/users/authenticate
+```
 
 # [Contributors](https://github.com/EloiAncellin/FinalProjectNode/blob/master/CONTRIBUTORS.md)
