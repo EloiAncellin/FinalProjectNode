@@ -42,29 +42,23 @@ The server is running an API which has the following routes :
 
 | Method | Route | Parameters | Description |
 | - | - | - | - |
-| POST | /users/register | email, password, firstName, lastName | Create a new user |
-| POST | /users/authenticate | email, password | Authenticate a user and returns an access **token** |
-| GET | /users/me | Authorization Token | Get personal details of a user |
+| POST | /api/users/register | email, password, firstName, lastName | Create a new user |
+| POST | /api/users/authenticate | email, password | Authenticate a user and returns an access **token** |
+| GET | /api/users/me | Authorization Token | Get personal details of a user |
 
 ### Metrics related requests
 
 | Method | Route | Parameters | Description |
 | - | - | - | - |
-| GET | /metrics | Authorization Token | Returns all metric names of that user |
-| GET | /metrics/:id | Authorization Token | Retrieve a metric by its id |
-| GET | /metrics/collection/:name | Authorization Token | Retrieve all metrics in a specific metric collection |
-| POST | /metrics | Authorization Token, name, value | Create a metric |
-| PUT | /metrics/:id | Authorization Token, name, value | Update a metric |
-| DELETE | /metrics/:id | Authorization Token | Delete a metric |
+| GET | /api/metrics | Authorization Token | Returns all metric names of that user |
+| GET | /api/metrics/:id | Authorization Token | Retrieve a metric by its id |
+| GET | /api/metrics/collection/:name | Authorization Token | Retrieve all metrics in a specific metric collection |
+| POST | /api/metrics | Authorization Token, name, value | Create a metric |
+| PUT | /api/metrics/:id | Authorization Token, name, value | Update a metric |
+| DELETE | /api/metrics/:id | Authorization Token | Delete a metric |
 
 ### Authorization Token
 
-The authorization token must be in the request's **header** :
-
-```
-{
-    'authorization': token
-}
-```
+The **Authorization Token** must be in the request's **header** as the `Authorization` field.
 
 # [Contributors](https://github.com/EloiAncellin/FinalProjectNode/blob/master/CONTRIBUTORS.md)
