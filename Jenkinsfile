@@ -1,11 +1,15 @@
 pipeline {
   agent any
   stages {
-    stage('build') {
+    stage('up') {
       steps {
-        build 'build'
+        sh 'docker-compose up'
       }
     }
-
+    stage('test') {
+      steps {
+        sh 'docker exec -it web npm run coverage'
+      }
+    }
   }
 }
