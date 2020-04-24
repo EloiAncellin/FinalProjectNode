@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('start') {
       steps {
-        sh '/usr/local/bin/docker-compose up'
+        sh 'npm start'
       }
     }
     stage('test') {
