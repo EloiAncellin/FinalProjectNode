@@ -8,5 +8,12 @@ pipeline {
         sh '/usr/local/bin/docker-compose up --build'
       }
     }
+    stage('test') {
+      steps {
+        sh 'docker exec -it web npm run coverage'
+      }
+    }
   }
 }
+
+
