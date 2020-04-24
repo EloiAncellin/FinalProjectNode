@@ -4,12 +4,12 @@ pipeline {
   stages {
     stage('start') {
       steps {
-        sh 'docker-compose up'
+        sh 'npm install'
       }
     }
     stage('test') {
       steps {
-        sh 'docker exec -it web npm run coverage'
+        sh 'npm test'
       }
     }
   }
