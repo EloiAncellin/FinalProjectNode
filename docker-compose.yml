@@ -12,10 +12,10 @@ services:
             - "./test:/code/test"
             - "./bin:/code/bin"
             - "./.env:/code/.env"
-        container_name: webtest
+        container_name: webtest1
         environment:
             - APP_ENV=${APP_ENV}
 
     mongodb:
         image: "mongo:${DB_TAG}"
-        container_name: mongodbtest
+        container_name: mongodbtest1
