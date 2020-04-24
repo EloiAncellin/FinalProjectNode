@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('start') {
       steps {
-        sh 'npm install'
+        sh 'docker-compser up'
    
       }
     }
