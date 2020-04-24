@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('start') {
       steps {
-        sh 'echo PATH'
+        sh 'echo $PATH'
         sh '/usr/local/bin/docker-compose up'
       }
     }
