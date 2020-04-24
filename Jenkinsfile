@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('start') {
       steps {
-        sh '/usr/locl/bin/docker-compose up'
+        sh '/usr/local/bin/docker-compose up'
    
       }
     }
