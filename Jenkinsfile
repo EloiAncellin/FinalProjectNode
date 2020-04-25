@@ -5,7 +5,7 @@ pipeline {
     stage('start') {
       steps {
         sh 'echo $PATH'
-        sh '/usr/local/bin/docker-compose up --build'
+        sh 'APP_ENV=dev docker-compose up /usr/local/bin/docker-compose up --build'
       }
     }
     stage('test') {
