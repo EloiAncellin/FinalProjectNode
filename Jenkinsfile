@@ -1,12 +1,12 @@
 pipeline {
-  agent { label 'docker'
-         dockerfile true 
+  agent any
+  tools {nodejs "nodejs"
+        docker "docker"
         }
-  tools {nodejs "nodejs"}
   stages {
     stage('start') {
       steps {
-        sh 'docker exec -it web npm run coverage'
+        sh 'docker-compose up -d'
       }
     }
  
