@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent {Dockerfile : true}
   tools {nodejs "nodejs"}
   stages {
     stage('start') {
