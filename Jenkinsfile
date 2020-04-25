@@ -8,11 +8,7 @@ pipeline {
         sh 'nom start'
       }
     }
-    stage('test') {
-      steps {
-        
-      }
-    }
+ 
   }
 }
 
