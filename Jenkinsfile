@@ -5,7 +5,7 @@ pipeline {
     stage('start') {
       steps {
         sh 'echo $PATH'
-        sh 'nom start'
+        sh 'npm start'
       }
     }
  
