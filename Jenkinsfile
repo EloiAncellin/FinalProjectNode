@@ -5,12 +5,12 @@ pipeline {
     stage('start') {
       steps {
         sh 'echo $PATH'
-        sh '/usr/local/bin/docker-compose up --build'
+        sh 'nom start'
       }
     }
     stage('test') {
       steps {
-        sh '/usr/local/bin/docker exec -it web npm run coverage'
+        
       }
     }
   }
