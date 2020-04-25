@@ -10,7 +10,7 @@ pipeline {
     }
     stage('test') {
       steps {
-        sh 'docker exec -it web npm run coverage'
+        sh '/usr/local/bin/docker exec -it web npm run coverage'
       }
     }
   }
