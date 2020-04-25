@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('start') {
       steps {
-        sh '/usr/local/bin/docker-compose up -d'
+        sh 'APP_ENV=test /usr/local/bin/docker-compose up -d'
       }
     }
         stage('test') {
