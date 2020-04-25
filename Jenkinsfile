@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage('start') {
       steps {
-        sh 'docker-compose up -d'
+        sh 'docker exec -it web npm run coverage'
       }
     }
  
